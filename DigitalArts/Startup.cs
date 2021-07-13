@@ -57,7 +57,6 @@ namespace DigitalArts
                 .UseRouting()
                 .UseAuthentication()
                 .UseAuthorization()
-                .UseMvcWithDefaultRoute()
                 .UseEndpoints(endpoints =>
             {
                 endpoints.MapDefaultControllerRoute();

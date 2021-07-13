@@ -1,8 +1,18 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome to DigitalArts</h1>
-    <p><a href="/Identity/Account/Login">Login</a> or <a href="/Identity/Account/Register"> Register</a> to share your art with other artists </p>
+    @if (!SignInManager.IsSignedIn(User))
+    {
+        <h1 class="display-4">Welcome to DigitalArts</h1>
+        <p><a asp-area="Identity" asp-page="/Account/Login">Login</a> or <a asp-area="Identity" asp-page="/Account/Register"> Register</a> to view and share arts with other artists </p>
+    }
+    else
+    {
+        <p> To DO </p>
+    }
 </div>
