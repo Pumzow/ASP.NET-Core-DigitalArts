@@ -19,7 +19,7 @@ namespace DigitalArts.Data.Models
         [MaxLength(LastNameMaxLength)]
         public string LastName { get; set; }
         [Required]
-        public IFormFile ProfileImage { get; set; }
+        public string ProfileImage { get; set; }
         [Required]
         [RegularExpression(EmailAddresslRegularExpression)]
         public string Email { get; set; }

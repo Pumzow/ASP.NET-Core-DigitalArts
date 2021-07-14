@@ -58,10 +58,10 @@ namespace DigitalArts
                 .UseAuthentication()
                 .UseAuthorization()
                 .UseEndpoints(endpoints =>
-            {
-                endpoints.MapDefaultControllerRoute();
-                endpoints.MapRazorPages();
-            });
+                {
+                    endpoints.MapDefaultControllerRoute();
+                    endpoints.MapRazorPages();
+                });
         }
     }
 }

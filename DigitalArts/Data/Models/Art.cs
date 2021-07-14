@@ -16,6 +16,6 @@ namespace DigitalArts.Data.Models
         public int Likes { get; set; }
         public int Dislikes { get; set; }
         [Required]
-        public IFormFile Image { get; set; }
+        public string Image { get; set; }
     }
 }

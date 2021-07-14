@@ -3,10 +3,43 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DigitalArts.Data.Migrations
 {
-    public partial class UserArtTables : Migration
+    public partial class ArtistArtTables : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Artist",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    FirstName = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: false),
+                    LastName = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: false),
+                    ProfileImage = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Username = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: false),
+                    TotalArtLikes = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Artist", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Arts",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(155)", maxLength: 155, nullable: true),
+                    Likes = table.Column<int>(type: "int", nullable: false),
+                    Dislikes = table.Column<int>(type: "int", nullable: false),
+                    Image = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Arts", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
@@ -44,6 +77,30 @@ namespace DigitalArts.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ArtistArts",
+                columns: table => new
+                {
+                    ArtistId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ArtId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ArtistArts", x => new { x.ArtistId, x.ArtId });
+                    table.ForeignKey(
+                        name: "FK_ArtistArts_Artist_ArtistId",
+                        column: x => x.ArtistId,
+                        principalTable: "Artist",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ArtistArts_Arts_ArtId",
+                        column: x => x.ArtId,
+                        principalTable: "Arts",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -153,6 +210,11 @@ namespace DigitalArts.Data.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_ArtistArts_ArtId",
+                table: "ArtistArts",
+                column: "ArtId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
                 column: "RoleId");
@@ -195,6 +257,9 @@ namespace DigitalArts.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "ArtistArts");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
             migrationBuilder.DropTable(
@@ -208,6 +273,12 @@ namespace DigitalArts.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "Artist");
+
+            migrationBuilder.DropTable(
+                name: "Arts");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

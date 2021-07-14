@@ -11,9 +11,21 @@ namespace DigitalArts.Data
         public DbSet<Art> Arts { get; init; }
 
         public DbSet<ArtistArt> ArtistArts { get; init; }
+
         public DigitalArtsDbContext(DbContextOptions<DigitalArtsDbContext> options)
             : base(options)
+        {}
+
+        protected override void OnModelCreating(ModelBuilder builder)
         {
+            builder.Entity<ArtistArt>()
+                .HasKey(x => new
+                {
+                    x.ArtistId,
+                    x.ArtId
+                });
+
+            base.OnModelCreating(builder);
         }
     }
 }
