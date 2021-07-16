@@ -18,6 +18,8 @@
         public const int PasswordMinLegth = 6;
         public const int PasswordMaxLegth = 36;
 
+        public const int ArtArtistFullnameMinLength = 7;
+        public const int ArtArtistFullnameMaxLength = 73;
         public const int ArtDescriptionLegth = 155;
     }
 }
