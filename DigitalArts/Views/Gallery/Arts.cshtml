@@ -1,7 +1,100 @@
-﻿
+﻿@model GalleryArtsQueryModel
 @{
     ViewData["Title"] = "Gallery";
 }
 
-<h1>Gallery</h1>
+<h1 class="text-center">Gallery</h1>
+
+<form method="get">
+    <div class="row">
+        <div class="form-group col-md-4">
+            <div class="form-group">
+                <label asp-for="Artist"></label>
+                <select asp-for="Artist" class="form-control">
+                    <option value="">All</option>
+
+                    @foreach (var artist in Model.Artists)
+                    {
+                        <option value="@artist">@artist</option>
+                    }
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group col-md-4">
+            <label asp-for="SearchTag"></label>
+            <input asp-for="SearchTag" class="form-control" placeholder="Aesthetic...">
+        </div>
+
+        <div class="form-group col-md-4">
+            <div class="form-group">
+                <label asp-for="Sorting"></label>
+                <select asp-for="Sorting" class="form-control">
+                    <option value="0" selected>Date Published</option>
+                    <option value="1">Likes</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</form>
+
+@{
+    var previousPage = Model.CurrentPage - 1;
+    if (previousPage < 1)
+    {
+        previousPage = 1;
+    }
+
+    var maxPage = Math.Ceiling((double)Model.TotalArts / GalleryArtsQueryModel.ArtsPerPage);
+}
+
+<div class="row mb-5">
+    <div class="col-md-6">
+        <a class="btn btn-primary @(Model.CurrentPage == 1 ? "disabled" : string.Empty)"
+           asp-controller="Gallery"
+           asp-action="Arts"
+           asp-route-currentPage="@previousPage"
+           asp-route-brand="@Model.Artist"
+           asp-route-searchTerm="@Model.SearchTag"
+           asp-route-sorting="@((int)Model.Sorting)"><<</a>
+    </div>
+    <div class="col-md-6">
+        <a class="btn btn-primary float-right @(Model.CurrentPage == maxPage ? "disabled" : string.Empty)"
+           asp-controller="Gallery"
+           asp-action="Arts"
+           asp-route-currentPage="@(Model.CurrentPage + 1)"
+           asp-route-brand="@Model.Artist"
+           asp-route-searchTerm="@Model.SearchTag"
+           asp-route-sorting="@((int)Model.Sorting)">>></a>
+    </div>
+</div>
+
+@if (!Model.Arts.Any())
+{
+    <h2 class="text-center">No arts found by the given criteria!</h2>
+}
+
+<div class="row">
+    @foreach (var art in Model.Arts)
+    {
+        <div class="col-md-4">
+            <a asp-controller="Cars" asp-action="Details" asp-route-id="@art.Id" style="text-decoration:none; color: black;">
+                <div class="card mb-3">
+                    <img class="card-img-top" src="@art.Image" alt="Can't load the image" style="object-fit: cover; height: 300px;">
+                    <div class="card-body text-left">
+                        <h5 class="card-title text-left">@art.Artist</h5>
+                        @if (Convert.ToInt32(Model.Sorting) == 0)
+                        {
+                            <h7 class="card-title text-left">@art.DatePublished</h7><br>
+                        }
+                        else if (Convert.ToInt32(Model.Sorting) == 1)
+                        {
+                            <h7 class="card-title text-left">@art.Likes Likes</h7><br>
+                        }
+                    </div>
+                </div>
+            </a>
+        </div>
+    }
+</div>
 

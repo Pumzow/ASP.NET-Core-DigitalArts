@@ -24,9 +24,15 @@ namespace DigitalArts.Data.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("Description")
+                    b.Property<string>("Artist")
                         .HasMaxLength(155)
                         .HasColumnType("nvarchar(155)");
+
+                    b.Property<DateTime>("DatePublished")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Dislikes")
                         .HasColumnType("int");
@@ -37,6 +43,9 @@ namespace DigitalArts.Data.Migrations
 
                     b.Property<int>("Likes")
                         .HasColumnType("int");
+
+                    b.Property<string>("Tags")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -81,7 +90,7 @@ namespace DigitalArts.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Artist");
+                    b.ToTable("Artists");
                 });
 
             modelBuilder.Entity("DigitalArts.Data.Models.ArtistArt", b =>

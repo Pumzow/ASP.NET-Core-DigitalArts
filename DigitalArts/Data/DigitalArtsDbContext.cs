@@ -6,7 +6,7 @@ namespace DigitalArts.Data
 {
     public class DigitalArtsDbContext : IdentityDbContext
     {
-        public DbSet<Artist> Artist { get; init; }
+        public DbSet<Artist> Artists { get; init; }
 
         public DbSet<Art> Arts { get; init; }
 

@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DigitalArts.Data.Migrations
 {
     [DbContext(typeof(DigitalArtsDbContext))]
-    [Migration("20210713155302_ArtistArtTables")]
+    [Migration("20210716124433_ArtistArtTables")]
     partial class ArtistArtTables
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -26,9 +26,15 @@ namespace DigitalArts.Data.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("Description")
+                    b.Property<string>("Artist")
                         .HasMaxLength(155)
                         .HasColumnType("nvarchar(155)");
+
+                    b.Property<DateTime>("DatePublished")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Dislikes")
                         .HasColumnType("int");
@@ -39,6 +45,9 @@ namespace DigitalArts.Data.Migrations
 
                     b.Property<int>("Likes")
                         .HasColumnType("int");
+
+                    b.Property<string>("Tags")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -83,7 +92,7 @@ namespace DigitalArts.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Artist");
+                    b.ToTable("Artists");
                 });
 
             modelBuilder.Entity("DigitalArts.Data.Models.ArtistArt", b =>

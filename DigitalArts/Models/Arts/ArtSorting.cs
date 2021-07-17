@@ -8,7 +8,6 @@ namespace DigitalArts.Models.Arts
     public enum ArtSorting
     {
         DatePublished = 0,
-        Likes = 1,
-        Artist = 2
+        Likes = 1
     }
 }

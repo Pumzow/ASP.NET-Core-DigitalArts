@@ -10,8 +10,8 @@ namespace DigitalArts.Models
 
         public string Artist { get; init; }
 
-        [Display(Name = "Tags")]
-        public string SearchTags { get; init; }
+        [Display(Name = "Tag")]
+        public string SearchTag { get; init; }
 
         public ArtSorting Sorting { get; init; }
 

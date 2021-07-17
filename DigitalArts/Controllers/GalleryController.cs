@@ -4,6 +4,7 @@ using DigitalArts.Data;
 using DigitalArts.Models;
 using DigitalArts.Data.Models;
 using DigitalArts.Models.Arts;
+using System;
 
 namespace DigitalArts.Controllers
 {
@@ -23,24 +24,16 @@ namespace DigitalArts.Controllers
                 artsQuery = artsQuery.Where(a => a.Artist == query.Artist);
             }
 
-            if (!string.IsNullOrWhiteSpace(query.SearchTags))
+            if (!string.IsNullOrWhiteSpace(query.SearchTag))
             {
-                var querySearchTags = query.SearchTags.Split(',').ToString().Trim().ToArray();
-
-                var tags = query.SearchTags.Split(',').ToString().Trim().ToArray();
-
-                foreach (var tag in tags)
-                {
-                    artsQuery = artsQuery.Where(a =>
-                        a.Tags.ToLower().Contains(tag.ToString().ToLower()));
-                }
+                artsQuery = artsQuery.Where(a =>
+                    a.Tags.ToLower().Contains(query.SearchTag.ToLower()));
             }
 
             artsQuery = query.Sorting switch
             {
                 ArtSorting.DatePublished => artsQuery.OrderByDescending(c => c.DatePublished),
-                ArtSorting.Likes => artsQuery.OrderByDescending(a => a.Likes),
-                ArtSorting.Artist or _ => artsQuery.OrderBy(a => a.Artist)
+                ArtSorting.Likes => artsQuery.OrderByDescending(a => a.Likes)
             };
 
             var totalArts = artsQuery.Count();
@@ -88,10 +81,12 @@ namespace DigitalArts.Controllers
 
             var artData = new Art
             {
+                Artist = "Ivan Petrov",
                 Description = art.Description,
                 Tags = art.Tags,
-                Likes = 0,
+                Likes = -1,
                 Dislikes = 0,
+                DatePublished = DateTime.UtcNow,
                 Image = art.Image
             };
 

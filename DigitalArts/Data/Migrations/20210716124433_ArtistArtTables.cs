@@ -8,7 +8,7 @@ namespace DigitalArts.Data.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Artist",
+                name: "Artists",
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
@@ -22,7 +22,7 @@ namespace DigitalArts.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Artist", x => x.Id);
+                    table.PrimaryKey("PK_Artists", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -30,9 +30,12 @@ namespace DigitalArts.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(155)", maxLength: 155, nullable: true),
+                    Artist = table.Column<string>(type: "nvarchar(155)", maxLength: 155, nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Tags = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Likes = table.Column<int>(type: "int", nullable: false),
                     Dislikes = table.Column<int>(type: "int", nullable: false),
+                    DatePublished = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Image = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
@@ -90,9 +93,9 @@ namespace DigitalArts.Data.Migrations
                 {
                     table.PrimaryKey("PK_ArtistArts", x => new { x.ArtistId, x.ArtId });
                     table.ForeignKey(
-                        name: "FK_ArtistArts_Artist_ArtistId",
+                        name: "FK_ArtistArts_Artists_ArtistId",
                         column: x => x.ArtistId,
-                        principalTable: "Artist",
+                        principalTable: "Artists",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -275,7 +278,7 @@ namespace DigitalArts.Data.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Artist");
+                name: "Artists");
 
             migrationBuilder.DropTable(
                 name: "Arts");
