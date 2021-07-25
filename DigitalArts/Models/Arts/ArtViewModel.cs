@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace DigitalArts.Models.Arts
+namespace DigitalArts.Models
 {
-    public class ArtListingViewModel
+    public class ArtViewModel
     {
         public string Id { get; set; }
         public string Artist { get; set; }

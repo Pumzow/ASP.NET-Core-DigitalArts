@@ -1,9 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using DigitalArts.Data;
+using static DigitalArts.Data.DataConstants;
 
 namespace DigitalArts.Models
 {
-    using static DataConstants;
 
     public class AddArtFormModel
     {
