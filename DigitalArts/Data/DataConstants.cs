@@ -2,8 +2,6 @@
 {
     public class DataConstants
     {
-        public const int IdMaxLength = 40;
-
         public const string EmailAddresslRegularExpression = @"^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$";
 
         public const int FirstNameMinLength = 3;
@@ -15,8 +13,8 @@
         public const int UsernameMinLength = 4;
         public const int UsernameMaxLength = 36;
 
-        public const int PasswordMinLegth = 6;
-        public const int PasswordMaxLegth = 36;
+        public const int PasswordMinLength = 6;
+        public const int PasswordMaxLength = 36;
 
         public const int ArtArtistFullnameMinLength = 7;
         public const int ArtArtistFullnameMaxLength = 73;

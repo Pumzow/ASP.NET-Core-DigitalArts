@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNetCore.Http;
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Identity;
 
 namespace DigitalArts.Data.Models
 {
     using static DataConstants;
 
-    public class Artist
+    public class Artist : IdentityUser
     {
         [Key]
         [Required]
@@ -25,12 +26,13 @@ namespace DigitalArts.Data.Models
         public string Email { get; set; }
         [Required]
         [MaxLength(UsernameMaxLength)]
-        public string Username { get; set; }
+        public string ArtistUsername { get; set; }
         [Required]
-        [MaxLength(PasswordMaxLegth)]
+        [MaxLength(PasswordMaxLength)]
         public string  Password { get; set; }
         [Required]
-        public int TotalArtLikes { get; set; }
+        [NotMapped]
+        public IEnumerable<string> LikedArts { get; set; } = new List<string>();
 
         public IEnumerable<ArtistArt> ArtistArts { get; set; } = new List<ArtistArt>();
 

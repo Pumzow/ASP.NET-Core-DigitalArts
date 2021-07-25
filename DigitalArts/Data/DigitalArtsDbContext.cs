@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DigitalArts.Data
 {
-    public class DigitalArtsDbContext : IdentityDbContext
+    public class DigitalArtsDbContext : IdentityDbContext<Artist>
     {
         public DbSet<Artist> Artists { get; init; }
 

@@ -1,10 +1,12 @@
-﻿@model GalleryArtsQueryModel
+﻿@model ArtViewModel
 @{
     ViewData["Title"] = "Gallery";
 }
 
 <h1 class="text-center">Gallery</h1>
 
+<h5> @Model.Artist </h5>
+@*
 <form method="get">
     <div class="row">
         <div class="form-group col-md-4">
@@ -78,7 +80,7 @@
     @foreach (var art in Model.Arts)
     {
         <div class="col-md-4">
-            <a asp-controller="Gallery" asp-action="Art" asp-route-id="@art.Id" style="text-decoration:none; color: black;">
+            <a asp-controller="Galley" asp-action="Art" asp-route-id="@art.Id" style="text-decoration:none; color: black;">
                 <div class="card mb-3">
                     <img class="card-img-top" src="@art.Image" alt="Can't load the image" style="object-fit: cover; height: 300px;">
                     <div class="card-body text-left">
@@ -97,4 +99,4 @@
         </div>
     }
 </div>
-
+*@

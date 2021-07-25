@@ -3,28 +3,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DigitalArts.Data.Migrations
 {
-    public partial class ArtistArtTables : Migration
+    public partial class ArtistArtsLiked : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
-                name: "Artists",
-                columns: table => new
-                {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    FirstName = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: false),
-                    LastName = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: false),
-                    ProfileImage = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Username = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: false),
-                    TotalArtLikes = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Artists", x => x.Id);
-                });
-
             migrationBuilder.CreateTable(
                 name: "Arts",
                 columns: table => new
@@ -62,9 +44,14 @@ namespace DigitalArts.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    FirstName = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: false),
+                    LastName = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: false),
+                    ProfileImage = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
+                    ArtistUsername = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedEmail = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     EmailConfirmed = table.Column<bool>(type: "bit", nullable: false),
                     PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -80,30 +67,6 @@ namespace DigitalArts.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ArtistArts",
-                columns: table => new
-                {
-                    ArtistId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ArtId = table.Column<string>(type: "nvarchar(450)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ArtistArts", x => new { x.ArtistId, x.ArtId });
-                    table.ForeignKey(
-                        name: "FK_ArtistArts_Artists_ArtistId",
-                        column: x => x.ArtistId,
-                        principalTable: "Artists",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_ArtistArts_Arts_ArtId",
-                        column: x => x.ArtId,
-                        principalTable: "Arts",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -123,6 +86,30 @@ namespace DigitalArts.Data.Migrations
                         name: "FK_AspNetRoleClaims_AspNetRoles_RoleId",
                         column: x => x.RoleId,
                         principalTable: "AspNetRoles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ArtistArts",
+                columns: table => new
+                {
+                    ArtistId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ArtId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ArtistArts", x => new { x.ArtistId, x.ArtId });
+                    table.ForeignKey(
+                        name: "FK_ArtistArts_Arts_ArtId",
+                        column: x => x.ArtId,
+                        principalTable: "Arts",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ArtistArts_AspNetUsers_ArtistId",
+                        column: x => x.ArtistId,
+                        principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -276,9 +263,6 @@ namespace DigitalArts.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
-
-            migrationBuilder.DropTable(
-                name: "Artists");
 
             migrationBuilder.DropTable(
                 name: "Arts");

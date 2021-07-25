@@ -95,5 +95,22 @@ namespace DigitalArts.Controllers
 
             return RedirectToAction("Arts", "Gallery");
         }
+
+        public ActionResult Art(ArtViewModel art)
+        {
+            var artData = data.Arts
+                .Where(a => a.Id == art.Id)
+                .Select(a => new ArtViewModel
+                {
+                    Artist = a.Artist,
+                    Tags = a.Tags,
+                    Likes = a.Likes,
+                    DatePublished = a.DatePublished,
+                    Image = a.Image
+                })
+                .FirstOrDefault();
+
+            return View(artData);
+        }
     }
 }

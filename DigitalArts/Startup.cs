@@ -1,7 +1,9 @@
 using DigitalArts.Data;
+using DigitalArts.Data.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -26,16 +28,20 @@ namespace DigitalArts
             services.AddDatabaseDeveloperPageExceptionFilter();
 
             services
-                .AddDefaultIdentity<IdentityUser>(options => 
+                .AddDefaultIdentity<Artist>(options => 
                 {
-                    options.Password.RequireDigit = false;
+                    options.Password.RequireDigit = true;
                     options.Password.RequireNonAlphanumeric = false;
                     options.Password.RequireUppercase = false;
-                    options.Password.RequireLowercase = false;
+                    options.Password.RequireLowercase = true;
                 })
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<DigitalArtsDbContext>();
 
-            services.AddControllersWithViews();
+            services.AddControllersWithViews(options =>
+            {
+                options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
+            });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
