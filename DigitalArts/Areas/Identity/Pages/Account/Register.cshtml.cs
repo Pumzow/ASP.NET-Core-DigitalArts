@@ -1,6 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Text;
-using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using DigitalArts.Data.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -86,7 +84,6 @@ namespace DigitalArts.Areas.Identity.Pages.Account
                     Email = Input.Email,
                     UserName = Input.Username,
                     ArtistUsername = Input.Username,
-                    Password = Input.Password,
                     ProfileImage = Input.ProfileImage
                 };
 

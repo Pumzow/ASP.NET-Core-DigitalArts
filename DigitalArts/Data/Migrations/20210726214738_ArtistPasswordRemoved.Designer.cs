@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DigitalArts.Data.Migrations
 {
     [DbContext(typeof(DigitalArtsDbContext))]
-    [Migration("20210725134905_ArtistArtsLiked")]
-    partial class ArtistArtsLiked
+    [Migration("20210726214738_ArtistPasswordRemoved")]
+    partial class ArtistPasswordRemoved
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -102,11 +102,6 @@ namespace DigitalArts.Data.Migrations
                     b.Property<string>("NormalizedUserName")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasMaxLength(36)
-                        .HasColumnType("nvarchar(36)");
 
                     b.Property<string>("PasswordHash")
                         .HasColumnType("nvarchar(max)");

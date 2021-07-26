@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DigitalArts.Data.Migrations
 {
-    public partial class ArtistArtsLiked : Migration
+    public partial class ArtistPasswordRemoved : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -49,7 +49,6 @@ namespace DigitalArts.Data.Migrations
                     ProfileImage = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
                     ArtistUsername = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedEmail = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),

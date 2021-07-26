@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNetCore.Identity;
+using static DigitalArts.Data.DataConstants;
 
 namespace DigitalArts.Data.Models
 {
-    using static DataConstants;
 
     public class Artist : IdentityUser
     {
@@ -27,9 +27,6 @@ namespace DigitalArts.Data.Models
         [Required]
         [MaxLength(UsernameMaxLength)]
         public string ArtistUsername { get; set; }
-        [Required]
-        [MaxLength(PasswordMaxLength)]
-        public string  Password { get; set; }
         [Required]
         [NotMapped]
         public IEnumerable<string> LikedArts { get; set; } = new List<string>();
