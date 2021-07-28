@@ -13,7 +13,7 @@ namespace DigitalArts.Data.Models
         [Required]
         public string Id { get; set; } = Guid.NewGuid().ToString();
         [MaxLength(ArtDescriptionLegth)]
-        public string Artist { get; set; }
+        public string ArtistId { get; set; }
         public string Description { get; set; }
         public string Tags { get; set; }
         public int Likes { get; set; }

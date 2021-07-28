@@ -9,10 +9,10 @@ namespace DigitalArts.Data.Models
 {
 
     public class Artist : IdentityUser
-    {
+    {/*
         [Key]
         [Required]
-        public string Id { get; set; } = Guid.NewGuid().ToString();
+        public string Id { get; set; } = Guid.NewGuid().ToString();*/
         [Required]
         [MaxLength(FirstNameMaxLength)]
         public string FirstName { get; set; }

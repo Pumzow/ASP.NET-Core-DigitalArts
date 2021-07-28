@@ -17,9 +17,9 @@ namespace DigitalArts.Controllers
         {
             var artsQuery = this.data.Arts.AsQueryable();
 
-            if (!string.IsNullOrWhiteSpace(query.Artist))
+            if (!string.IsNullOrWhiteSpace(query.ArtistId))
             {
-                artsQuery = artsQuery.Where(a => a.Artist == query.Artist);
+                artsQuery = artsQuery.Where(a => a.ArtistId == query.ArtistId);
             }
 
             if (!string.IsNullOrWhiteSpace(query.SearchTag))
@@ -42,7 +42,7 @@ namespace DigitalArts.Controllers
                 .Select(a => new GalleryListingViewModel
                 {
                     Id = a.Id,
-                    Artist = a.Artist,
+                    ArtistId = a.ArtistId,
                     Tags = a.Tags,
                     Likes = a.Likes,
                     DatePublished = a.DatePublished,
@@ -52,7 +52,7 @@ namespace DigitalArts.Controllers
 
             var artArtist = this.data
                 .Arts
-                .Select(c => c.Artist)
+                .Select(c => c.ArtistId)
                 .Distinct()
                 .OrderBy(br => br)
                 .ToList();

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DigitalArts.Data.Migrations
 {
-    public partial class ArtistPasswordRemoved : Migration
+    public partial class ArtArtistId : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -12,7 +12,7 @@ namespace DigitalArts.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Artist = table.Column<string>(type: "nvarchar(155)", maxLength: 155, nullable: true),
+                    ArtistId = table.Column<string>(type: "nvarchar(155)", maxLength: 155, nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Tags = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Likes = table.Column<int>(type: "int", nullable: false),

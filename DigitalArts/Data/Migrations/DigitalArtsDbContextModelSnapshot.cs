@@ -24,7 +24,7 @@ namespace DigitalArts.Data.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("Artist")
+                    b.Property<string>("ArtistId")
                         .HasMaxLength(155)
                         .HasColumnType("nvarchar(155)");
 

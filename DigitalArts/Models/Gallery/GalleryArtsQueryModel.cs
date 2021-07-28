@@ -8,7 +8,7 @@ namespace DigitalArts.Models
     {
         public const int ArtsPerPage = 3;
 
-        public string Artist { get; init; }
+        public string ArtistId { get; init; }
 
         [Display(Name = "Tag")]
         public string SearchTag { get; init; }

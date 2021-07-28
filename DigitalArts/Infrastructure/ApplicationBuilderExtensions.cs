@@ -56,7 +56,6 @@ namespace DigitalArts.Infrastructure
 
                     var artist = new Artist
                     {
-                        Id = "Admin",
                         FirstName = adminFirstName,
                         LastName = adminLastName,
                         UserName = adminUsername,

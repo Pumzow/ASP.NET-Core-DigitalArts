@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DigitalArts.Data.Migrations
 {
     [DbContext(typeof(DigitalArtsDbContext))]
-    [Migration("20210726214738_ArtistPasswordRemoved")]
-    partial class ArtistPasswordRemoved
+    [Migration("20210728151557_ArtArtistId")]
+    partial class ArtArtistId
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -26,7 +26,7 @@ namespace DigitalArts.Data.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("Artist")
+                    b.Property<string>("ArtistId")
                         .HasMaxLength(155)
                         .HasColumnType("nvarchar(155)");
 
