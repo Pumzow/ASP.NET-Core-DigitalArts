@@ -2,9 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using DigitalArts.Data;
 using DigitalArts.Models;
-using DigitalArts.Data.Models;
 using DigitalArts.Models.Arts;
-using System;
 
 namespace DigitalArts.Controllers
 {
@@ -15,7 +13,7 @@ namespace DigitalArts.Controllers
         public GalleryController(DigitalArtsDbContext data)
             => this.data = data;
 
-        public ActionResult Arts([FromQuery] GalleryArtsQueryModel query)
+        public ActionResult Index([FromQuery] GalleryArtsQueryModel query)
         {
             var artsQuery = this.data.Arts.AsQueryable();
 
@@ -32,8 +30,8 @@ namespace DigitalArts.Controllers
 
             artsQuery = query.Sorting switch
             {
-                ArtSorting.DatePublished => artsQuery.OrderByDescending(c => c.DatePublished),
-                ArtSorting.Likes => artsQuery.OrderByDescending(a => a.Likes)
+                GallerySorting.DatePublished => artsQuery.OrderByDescending(c => c.DatePublished),
+                GallerySorting.Likes => artsQuery.OrderByDescending(a => a.Likes)
             };
 
             var totalArts = artsQuery.Count();
@@ -41,7 +39,7 @@ namespace DigitalArts.Controllers
             var arts = artsQuery
                 .Skip((query.CurrentPage - 1) * GalleryArtsQueryModel.ArtsPerPage)
                 .Take(GalleryArtsQueryModel.ArtsPerPage)
-                .Select(a => new ArtListingViewModel
+                .Select(a => new GalleryListingViewModel
                 {
                     Id = a.Id,
                     Artist = a.Artist,
@@ -64,53 +62,6 @@ namespace DigitalArts.Controllers
             query.Arts = arts;
 
             return View(query);
-        }
-
-        public ActionResult Add()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult Add(AddArtFormModel art)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(art);
-            }
-
-            var artData = new Art
-            {
-                Artist = "Ivan Petrov",
-                Description = art.Description,
-                Tags = art.Tags,
-                Likes = -1,
-                Dislikes = 0,
-                DatePublished = DateTime.UtcNow,
-                Image = art.Image
-            };
-
-            this.data.Arts.Add(artData);
-            this.data.SaveChanges();
-
-            return RedirectToAction("Arts", "Gallery");
-        }
-
-        public ActionResult Art(ArtViewModel art)
-        {
-            var artData = data.Arts
-                .Where(a => a.Id == art.Id)
-                .Select(a => new ArtViewModel
-                {
-                    Artist = a.Artist,
-                    Tags = a.Tags,
-                    Likes = a.Likes,
-                    DatePublished = a.DatePublished,
-                    Image = a.Image
-                })
-                .FirstOrDefault();
-
-            return View(artData);
         }
     }
 }

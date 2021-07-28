@@ -1,6 +1,6 @@
 ﻿namespace DigitalArts.Models.Arts
 {
-    public enum ArtSorting
+    public enum GallerySorting
     {
         DatePublished = 0,
         Likes = 1

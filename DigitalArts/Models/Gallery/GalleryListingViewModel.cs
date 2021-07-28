@@ -2,7 +2,7 @@
 
 namespace DigitalArts.Models.Arts
 {
-    public class ArtListingViewModel
+    public class GalleryListingViewModel
     {
         public string Id { get; set; }
         public string Artist { get; set; }

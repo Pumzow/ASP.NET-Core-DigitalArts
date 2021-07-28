@@ -13,7 +13,7 @@ namespace DigitalArts.Models
         [Display(Name = "Tag")]
         public string SearchTag { get; init; }
 
-        public ArtSorting Sorting { get; init; }
+        public GallerySorting Sorting { get; init; }
 
         public int CurrentPage { get; init; } = 1;
 
@@ -21,6 +21,6 @@ namespace DigitalArts.Models
 
         public IEnumerable<string> Artists { get; set; }
 
-        public IEnumerable<ArtListingViewModel> Arts { get; set; }
+        public IEnumerable<GalleryListingViewModel> Arts { get; set; }
     }
 }
