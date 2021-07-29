@@ -8,8 +8,6 @@
             string Tags,
             string Image);
 
-        ArtViewServiceModel View(
-
-            );
+        ArtViewServiceModel View(string Id);
     }
 }

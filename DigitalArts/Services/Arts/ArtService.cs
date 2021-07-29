@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using DigitalArts.Data;
 using DigitalArts.Data.Models;
 
@@ -28,9 +29,21 @@ namespace DigitalArts.Services.Arts
             return artData.Id;
         }
 
-        public ArtViewServiceModel View()
-        {
-            throw new NotImplementedException();
-        }
+        public ArtViewServiceModel View(string Id)
+            => this.data
+                .Arts
+                .Where(a => a.Id == Id)
+                .Select(a => new ArtViewServiceModel
+                {
+                    Id = a.Id,
+                    ArtistId = a.ArtistId,
+                    Description = a.Description,
+                    Tags = a.Tags,
+                    Likes = a.Likes,
+                    Dislikes = a.Dislikes,
+                    DatePublished = a.DatePublished,
+                    Image = a.Image
+                })
+                .FirstOrDefault();
     }
 }

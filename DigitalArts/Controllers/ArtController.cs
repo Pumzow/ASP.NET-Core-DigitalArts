@@ -12,12 +12,11 @@ namespace DigitalArts.Controllers
 {
     public class ArtController : Controller
     {
-        //private readonly DigitalArtsDbContext data;
         private readonly IArtService arts;
         private readonly IArtistService artists;
 
         public ArtController(IArtService arts, IArtistService artists)
-        { 
+        {
             this.arts = arts;
             this.artists = artists;
         }
@@ -33,14 +32,7 @@ namespace DigitalArts.Controllers
 
             if (String.IsNullOrWhiteSpace(artistId))
             {
-                //return RedirectToAction(nameof(DealersController.Become), "Dealers");
                 return Redirect("~/Identity/Account/Register");
-            }
-
-            var artistFullName = this.artists.FullNameByUser(this.User.GetId());
-            if (String.IsNullOrWhiteSpace(artistId))
-            {
-                this.ModelState.AddModelError(nameof(artistFullName), "Artist does not have a name.");
             }
 
             if (!ModelState.IsValid)
@@ -50,32 +42,48 @@ namespace DigitalArts.Controllers
 
             this.arts.Post
                 (
-                    artistFullName,
+                    artistId,
                     art.Description,
                     art.Tags,
                     art.Image
                 );
 
-            /*var artData = new Art
-            {
-                Artist = "Ivan Petrov",
-                Description = art.Description,
-                Tags = art.Tags,
-                Likes = -1,
-                Dislikes = 0,
-                DatePublished = DateTime.UtcNow,
-                Image = art.Image
-            };
-
-            this.data.Arts.Add(artData);
-            this.data.SaveChanges();*/
-
             return RedirectToAction("Index", "Gallery");
         }
 
-        /*public ActionResult View(string Id, ArtViewModel art)
+        public ActionResult View(string Id)
         {
-            var artData = data.Arts
+            var artistId = this.artists.IdByUser(this.User.GetId());
+
+            if (String.IsNullOrWhiteSpace(artistId))
+            {
+                return Redirect("~/Identity/Account/Register");
+            }
+
+            var artData = this.arts.View(Id);
+
+            if (artData.ArtistId != artistId/* && !User.IsAdmin()*/)
+            {
+                return Unauthorized();
+            }
+
+            var artistFullName = this.artists.FullNameByUser(artData.ArtistId);
+            if (String.IsNullOrWhiteSpace(artistId))
+            {
+                this.ModelState.AddModelError(nameof(artistFullName), "Artist does not have a name.");
+            }
+
+            return View(new ArtViewModel
+            {
+                Id = artData.Id,
+                ArtistFullName = artistFullName,
+                Tags = artData.Tags,
+                Likes = artData.Likes,
+                DatePublished = artData.DatePublished,
+                Image = artData.Image
+            });
+
+            /*var artData = data.Arts
                 .Where(a => a.Id == Id)
                 .Select(a => new ArtViewModel
                 {
@@ -88,7 +96,7 @@ namespace DigitalArts.Controllers
                 })
                 .FirstOrDefault();
 
-            return View(artData);
-        }*/
+            return View(artData);*/
+        }
     }
 }
