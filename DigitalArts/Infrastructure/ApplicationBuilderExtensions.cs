@@ -1,11 +1,11 @@
-﻿using DigitalArts.Data;
+﻿using System;
+using System.Threading.Tasks;
+using DigitalArts.Data;
 using DigitalArts.Data.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Threading.Tasks;
 using static DigitalArts.WebConstants;
 
 namespace DigitalArts.Infrastructure
