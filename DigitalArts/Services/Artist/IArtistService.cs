@@ -9,5 +9,7 @@ namespace DigitalArts.Services.Artist
     {
         public string IdByUser(string Id);
         public string FullNameByUser(string Id);
+
+        public IEnumerable<string> All();
     }
 }

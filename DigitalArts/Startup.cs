@@ -3,6 +3,7 @@ using DigitalArts.Data.Models;
 using DigitalArts.Infrastructure;
 using DigitalArts.Services.Artist;
 using DigitalArts.Services.Arts;
+using DigitalArts.Services.Gallery;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -46,6 +47,7 @@ namespace DigitalArts
 
             services.AddTransient<IArtService, ArtService>();
             services.AddTransient<IArtistService, ArtistService>();
+            services.AddTransient<IGalleryService, GalleryService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

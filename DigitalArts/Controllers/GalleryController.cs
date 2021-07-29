@@ -1,21 +1,41 @@
 ﻿using System.Linq;
-using Microsoft.AspNetCore.Mvc;
-using DigitalArts.Data;
 using DigitalArts.Models;
-using DigitalArts.Models.Arts;
+using DigitalArts.Services.Gallery;
+using DigitalArts.Services.Artist;
+using Microsoft.AspNetCore.Mvc;
 
 namespace DigitalArts.Controllers
 {
     public class GalleryController : Controller
     {
-        private readonly DigitalArtsDbContext data;
+        private readonly IGalleryService gallery;
+        private readonly IArtistService artists;
 
-        public GalleryController(DigitalArtsDbContext data)
-            => this.data = data;
+        public GalleryController(IGalleryService gallery, IArtistService artists)
+        { 
+           this.gallery = gallery;
+           this.artists = artists;
+        }
 
         public ActionResult Index([FromQuery] GalleryArtsQueryModel query)
         {
-            var artsQuery = this.data.Arts.AsQueryable();
+
+            var queryResult = this.gallery.All(
+                GalleryArtsQueryModel.ArtsPerPage,
+                query.CurrentPage,
+                query.Sorting,
+                query.ArtistFullName,
+                query.SearchTag);
+
+            var artists = this.artists.All();
+
+            query.Artists = artists;
+            query.TotalArts = queryResult.TotalArts;
+            query.Arts = queryResult.Arts;
+
+            return View(query);
+
+            /*var artsQuery = this.data.Arts.AsQueryable();
 
             if (!string.IsNullOrWhiteSpace(query.ArtistId))
             {
@@ -61,7 +81,7 @@ namespace DigitalArts.Controllers
             query.Artists = artArtist;
             query.Arts = arts;
 
-            return View(query);
+            return View(query);*/
         }
     }
 }

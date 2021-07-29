@@ -12,11 +12,12 @@ namespace DigitalArts.Services.Arts
         public ArtService(DigitalArtsDbContext data)
             => this.data = data;
 
-        public string Post(string ArtistId, string Description, string Tags, string Image)
+        public string Post(string ArtistId, string ArtistFullName, string Description, string Tags, string Image)
         {
             var artData = new Art
             {
                 ArtistId = ArtistId,
+                ArtistFullName = ArtistFullName,
                 Description = Description,
                 Tags = Tags,
                 DatePublished = DateTime.UtcNow,

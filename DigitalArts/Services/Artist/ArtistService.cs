@@ -38,5 +38,27 @@ namespace DigitalArts.Services.Artist
             return fullName;
         }
 
+        public IEnumerable<string> All()
+        {
+            var artists = this.data
+                .Artists
+                .Select(a => new ArtistServiceModel
+                {
+                    FirstName = a.FirstName,
+                    LastName = a.LastName
+                })
+                .OrderBy(a => a.FirstName)
+                .ThenBy(a => a.LastName)
+                .ToList();
+
+            var resultArtists = new List<string>();
+
+            foreach (var artist in artists)
+            {
+                resultArtists.Add(artist.FirstName + " " + artist.LastName);
+            }
+
+            return resultArtists;
+        }
     }
 }

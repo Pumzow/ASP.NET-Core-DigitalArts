@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using DigitalArts.Models.Arts;
+using DigitalArts.Services.Gallery;
 
 namespace DigitalArts.Models
 {
@@ -8,7 +9,7 @@ namespace DigitalArts.Models
     {
         public const int ArtsPerPage = 3;
 
-        public string ArtistId { get; init; }
+        public string ArtistFullName { get; init; }
 
         [Display(Name = "Tag")]
         public string SearchTag { get; init; }
@@ -21,6 +22,6 @@ namespace DigitalArts.Models
 
         public IEnumerable<string> Artists { get; set; }
 
-        public IEnumerable<GalleryListingViewModel> Arts { get; set; }
+        public IEnumerable<GalleryArtServiceModel> Arts { get; set; }
     }
 }

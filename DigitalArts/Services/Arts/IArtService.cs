@@ -4,6 +4,7 @@
     {
         string Post(
             string ArtistId,
+            string ArtistFullName,
             string Description,
             string Tags,
             string Image);

@@ -10,21 +10,24 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DigitalArts.Data.Migrations
 {
     [DbContext(typeof(DigitalArtsDbContext))]
-    [Migration("20210728151557_ArtArtistId")]
-    partial class ArtArtistId
+    [Migration("20210729172836_ArtArtistFullName")]
+    partial class ArtArtistFullName
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.3")
+                .HasAnnotation("ProductVersion", "5.0.8")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("DigitalArts.Data.Models.Art", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ArtistFullName")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ArtistId")
                         .HasMaxLength(155)

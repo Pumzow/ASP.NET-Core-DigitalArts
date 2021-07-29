@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Linq;
-using DigitalArts.Data;
-using DigitalArts.Data.Models;
 using DigitalArts.Infrastructure;
 using DigitalArts.Models;
 using DigitalArts.Services.Artist;
@@ -35,6 +32,12 @@ namespace DigitalArts.Controllers
                 return Redirect("~/Identity/Account/Register");
             }
 
+            var artistFullName = this.artists.FullNameByUser(artistId);
+            if (String.IsNullOrWhiteSpace(artistFullName))
+            {
+                this.ModelState.AddModelError(nameof(artistFullName), "Artist does not have a name.");
+            }
+
             if (!ModelState.IsValid)
             {
                 return View(art);
@@ -43,6 +46,7 @@ namespace DigitalArts.Controllers
             this.arts.Post
                 (
                     artistId,
+                    artistFullName,
                     art.Description,
                     art.Tags,
                     art.Image
@@ -68,7 +72,7 @@ namespace DigitalArts.Controllers
             }
 
             var artistFullName = this.artists.FullNameByUser(artData.ArtistId);
-            if (String.IsNullOrWhiteSpace(artistId))
+            if (String.IsNullOrWhiteSpace(artistFullName))
             {
                 this.ModelState.AddModelError(nameof(artistFullName), "Artist does not have a name.");
             }
