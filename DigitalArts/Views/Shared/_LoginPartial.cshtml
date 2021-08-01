@@ -10,12 +10,12 @@
         <div class="btn-group" role="group" aria-label="Basic example">
             <button type="button" class="btn btn-dark">
                 <a class="nav-link text-light" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage"> 
-                    <img src="~/Resources/ProfileIcon.png" alt="Profile" width="25px"/>
+                    <img src="~/Resources/ProfileIcon.png" alt="Profile" height="25px"/> @User.Identity.Name
                 </a>
             </button>
             <button type="button" class="btn btn-dark">
                 <a class="nav-link text-light" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                    <img src="~/Resources/LogoutIcon.png" alt="Profile" width="25px" />
+                    <img src="~/Resources/LogoutIcon.png" alt="Profile" height="25px"/> Log out
                 </a> 
             </button>
         </div>

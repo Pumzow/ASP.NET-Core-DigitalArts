@@ -26,7 +26,25 @@
                         <li class="nav-item">
                             @if (SignInManager.IsSignedIn(User))
                             {
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Gallery" asp-action="Index">Gallery</a>
+                                @*
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Gallery" asp-action="Index">Gallery</a>*@
+                                <div class="btn-group" role="group" aria-label="Basic example">
+                                    <button type="button" class="btn btn-dark">
+                                        <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">
+                                            <img src="~/Resources/HomeIcon.png" alt="Profile" height="25px" /> Home
+                                        </a>
+                                    </button>
+                                    <button type="button" class="btn btn-dark">
+                                        <a class="nav-link text-light" asp-area="" asp-controller="Gallery" asp-action="Index">
+                                            <img src="~/Resources/GalleryIcon.png" alt="Profile" height="25px" /> Gallery
+                                        </a>
+                                    </button>
+                                    <button type="button" class="btn btn-dark">
+                                        <a class="nav-link text-light" asp-area="" asp-controller="Art" asp-action="Post">
+                                            <img src="~/Resources/PostIcon.png" alt="Profile" height="25px" /> Post
+                                        </a>
+                                    </button>
+                                </div>
                             }
                         </li>
                     </ul>
