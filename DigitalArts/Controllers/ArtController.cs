@@ -1,8 +1,10 @@
 ﻿using System;
 using DigitalArts.Infrastructure;
 using DigitalArts.Models;
+using DigitalArts.Models.Arts;
 using DigitalArts.Services.Artist;
 using DigitalArts.Services.Arts;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DigitalArts.Controllers
@@ -101,6 +103,42 @@ namespace DigitalArts.Controllers
                 .FirstOrDefault();
 
             return View(artData);*/
+        }
+
+        [Authorize]
+        public IActionResult Edit(string id)
+        {
+            var artistId = this.User.GetId();
+
+            var art = this.arts.View(id);
+
+            if (art.ArtistId != artistId && !User.IsAdmin())
+            {
+                return Unauthorized();
+            }
+
+            return View(new EditArtFormModel
+            {
+                Description = art.Description,
+                Tags = art.Tags
+            });
+        }
+
+        [HttpPost]
+        [Authorize]
+        public IActionResult Edit(string id, EditArtFormModel art)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(art);
+            }
+
+            this.arts.Edit(
+                id,
+                art.Description,
+                art.Tags);
+
+            return RedirectToAction("Index", "Gallery");
         }
     }
 }

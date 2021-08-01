@@ -10,5 +10,10 @@
             string Image);
 
         ArtViewServiceModel View(string Id);
+
+        bool Edit(
+            string Id,
+            string Description,
+            string Tags);
     }
 }

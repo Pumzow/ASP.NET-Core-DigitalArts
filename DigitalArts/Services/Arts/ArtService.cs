@@ -29,7 +29,6 @@ namespace DigitalArts.Services.Arts
 
             return artData.Id;
         }
-
         public ArtViewServiceModel View(string Id)
             => this.data
                 .Arts
@@ -46,5 +45,21 @@ namespace DigitalArts.Services.Arts
                     Image = a.Image
                 })
                 .FirstOrDefault();
+        public bool Edit(string Id, string Description, string Tags)
+        {
+            var artData = this.data.Arts.Find(Id);
+
+            if (artData == null)
+            {
+                return false;
+            }
+
+            artData.Description = Description;
+            artData.Tags = Tags;
+
+            this.data.SaveChanges();
+
+            return true;
+        }
     }
 }
