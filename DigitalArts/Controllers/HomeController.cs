@@ -1,21 +1,23 @@
-﻿using System.Linq;
-using DigitalArts.Data;
+﻿using DigitalArts.Data;
 using DigitalArts.Models.Home;
+using DigitalArts.Services.Home;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 
 namespace DigitalArts.Controllers
 {
     public class HomeController : Controller
     {
         private readonly DigitalArtsDbContext data;
+        private readonly IHomeService home;
 
-        public HomeController(DigitalArtsDbContext data)
-            => this.data = data;
+        public HomeController(IHomeService home)
+            => this.home = home;
 
         public IActionResult Index()
         {
-            var arts = this.data
+            var arts = this.home.TopArts();
+
+            /*var arts = this.data
                 .Arts
                 .OrderByDescending(c => c.Id)
                 .Select(a => new ArtIndexViewModel
@@ -30,10 +32,10 @@ namespace DigitalArts.Controllers
                 .OrderByDescending(a => a.Likes)
                 .ThenBy(a => a.DatePublished)
                 .Take(3)
-                .ToList();
+                .ToList();*/
 
             return View(new IndexViewModel
-            {
+            { 
                 Arts = arts
             });
         }
