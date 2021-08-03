@@ -7,7 +7,6 @@ namespace DigitalArts.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly DigitalArtsDbContext data;
         private readonly IHomeService home;
 
         public HomeController(IHomeService home)
@@ -17,22 +16,6 @@ namespace DigitalArts.Controllers
         {
             var arts = this.home.TopArts();
 
-            /*var arts = this.data
-                .Arts
-                .OrderByDescending(c => c.Id)
-                .Select(a => new ArtIndexViewModel
-                {
-                    Id = a.Id,
-                    ArtistFullName = a.ArtistFullName,
-                    Tags = a.Tags,
-                    Likes = a.Likes,
-                    DatePublished = a.DatePublished,
-                    Image = a.Image
-                })
-                .OrderByDescending(a => a.Likes)
-                .ThenBy(a => a.DatePublished)
-                .Take(3)
-                .ToList();*/
 
             return View(new IndexViewModel
             { 

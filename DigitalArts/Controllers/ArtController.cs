@@ -19,12 +19,14 @@ namespace DigitalArts.Controllers
             this.arts = arts;
             this.artists = artists;
         }
+        [Authorize]
         public ActionResult Post()
         {
             return View();
         }
 
         [HttpPost]
+        [Authorize]
         public ActionResult Post(AddArtFormModel art)
         {
             var artistId = this.artists.IdByUser(this.User.GetId());
@@ -57,18 +59,24 @@ namespace DigitalArts.Controllers
             return RedirectToAction("Index", "Gallery");
         }
 
-        public ActionResult View(string Id)
+        public ActionResult View(string id)
         {
             var artistId = this.artists.IdByUser(this.User.GetId());
 
             if (String.IsNullOrWhiteSpace(artistId))
             {
+                this.ModelState.AddModelError(nameof(artistId), "Artist is not authorized.");
                 return Redirect("~/Identity/Account/Register");
             }
 
-            var artData = this.arts.View(Id);
+            var artData = this.arts.View(id);
 
-            if (artData.ArtistId != artistId/* && !User.IsAdmin()*/)
+            if (artData == null)
+            {
+                this.ModelState.AddModelError(nameof(artData), "Art does not exist.");
+                return RedirectToAction("Index", "Gallery");
+            }
+            else if (artData.ArtistId != artistId && !User.IsAdmin())
             {
                 return Unauthorized();
             }
@@ -77,32 +85,19 @@ namespace DigitalArts.Controllers
             if (String.IsNullOrWhiteSpace(artistFullName))
             {
                 this.ModelState.AddModelError(nameof(artistFullName), "Artist does not have a name.");
+                return RedirectToAction("Index", "Gallery");
             }
 
             return View(new ArtViewModel
             {
                 Id = artData.Id,
                 ArtistFullName = artistFullName,
+                Description = artData.Description,
                 Tags = artData.Tags,
                 Likes = artData.Likes,
                 DatePublished = artData.DatePublished,
                 Image = artData.Image
             });
-
-            /*var artData = data.Arts
-                .Where(a => a.Id == Id)
-                .Select(a => new ArtViewModel
-                {
-                    Id = a.Id,
-                    Artist = a.Artist,
-                    Tags = a.Tags,
-                    Likes = a.Likes,
-                    DatePublished = a.DatePublished,
-                    Image = a.Image
-                })
-                .FirstOrDefault();
-
-            return View(artData);*/
         }
 
         [Authorize]
@@ -110,17 +105,28 @@ namespace DigitalArts.Controllers
         {
             var artistId = this.User.GetId();
 
-            var art = this.arts.View(id);
+            if (String.IsNullOrWhiteSpace(artistId))
+            {
+                this.ModelState.AddModelError(nameof(artistId), "Artist is not authorized.");
+                return Redirect("~/Identity/Account/Register");
+            }
 
-            if (art.ArtistId != artistId && !User.IsAdmin())
+            var artData = this.arts.View(id);
+
+            if (artData == null)
+            {
+                this.ModelState.AddModelError(nameof(artData), "Art does not exist.");
+                return RedirectToAction("Index", "Gallery");
+            }
+            else if (artData.ArtistId != artistId && !User.IsAdmin())
             {
                 return Unauthorized();
             }
 
             return View(new EditArtFormModel
             {
-                Description = art.Description,
-                Tags = art.Tags
+                Description = artData.Description,
+                Tags = artData.Tags
             });
         }
 
@@ -140,5 +146,40 @@ namespace DigitalArts.Controllers
 
             return RedirectToAction("Index", "Gallery");
         }
+        [Authorize]
+        public IActionResult Delete(string id)
+        {
+            var artistId = this.User.GetId();
+
+            if (String.IsNullOrWhiteSpace(artistId))
+            {
+                this.ModelState.AddModelError(nameof(artistId), "Artist is not authorized.");
+                return Redirect("~/Identity/Account/Register");
+            }
+
+            var artData = this.arts.View(id);
+
+            if (artData == null)
+            {
+                this.ModelState.AddModelError(nameof(artData), "Art does not exist.");
+                return RedirectToAction("Index", "Gallery");
+            }
+            else if (artData.ArtistId != artistId && !User.IsAdmin())
+            {
+                return Unauthorized();
+            }
+
+            if (!ModelState.IsValid)
+            {
+                this.ModelState.AddModelError(nameof(id), "Art with such id does not exist.");
+
+                return RedirectToAction("Index", "Gallery");
+            }
+
+            this.arts.Delete(id);
+
+            return RedirectToAction("Index", "Gallery");
+        }
+
     }
 }

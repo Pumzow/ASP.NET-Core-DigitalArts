@@ -15,5 +15,7 @@
             string Id,
             string Description,
             string Tags);
+        bool Delete(
+            string Id);
     }
 }

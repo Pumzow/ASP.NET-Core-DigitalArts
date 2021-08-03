@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNetCore.Http;
+using static DigitalArts.Data.DataConstants;
 
 namespace DigitalArts.Data.Models
 {
-    using static DataConstants;
 
     public class Art
     {

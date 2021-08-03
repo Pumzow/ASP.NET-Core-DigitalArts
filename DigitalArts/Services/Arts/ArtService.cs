@@ -61,5 +61,21 @@ namespace DigitalArts.Services.Arts
 
             return true;
         }
+
+        public bool Delete(string Id)
+        {
+            var artData = this.data.Arts.Find(Id);
+
+            if (artData == null)
+            {
+                return false;
+            }
+
+            this.data.Remove(artData);
+
+            this.data.SaveChanges();
+
+            return true;
+        }
     }
 }

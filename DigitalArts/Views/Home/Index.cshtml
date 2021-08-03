@@ -8,8 +8,10 @@
 
 @if (!SignInManager.IsSignedIn(User))
 {
-    <h1 class="display-4">Welcome to DigitalArts</h1>
-    <p><a asp-area="Identity" asp-page="/Account/Login">Login</a> or <a asp-area="Identity" asp-page="/Account/Register"> Register</a> to view and share arts with other artists </p>
+    <div class="home">
+        <h1 class="display-4">Welcome to DigitalArts</h1>
+        <p><a asp-area="Identity" asp-page="/Account/Login">Login</a> or <a asp-area="Identity" asp-page="/Account/Register"> Register</a> to view and share arts with other artists </p>
+    </div>
 }
 else
 {
@@ -65,3 +67,11 @@ else
 }
 <div class="text-center">
 </div>
+
+<style>
+    .home {
+        text-align:center;
+        margin-top: 75px;
+        margin-bottom: 75px;
+    }
+</style>

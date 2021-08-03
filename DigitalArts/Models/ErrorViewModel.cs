@@ -1,5 +1,3 @@
-using System;
-
 namespace DigitalArts.Models
 {
     public class ErrorViewModel
