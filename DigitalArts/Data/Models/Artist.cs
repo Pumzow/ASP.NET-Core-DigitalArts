@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNetCore.Identity;
 using static DigitalArts.Data.DataConstants;
 
@@ -23,11 +22,7 @@ namespace DigitalArts.Data.Models
         [Required]
         [MaxLength(UsernameMaxLength)]
         public string ArtistUsername { get; set; }
-        [Required]
-        [NotMapped]
-        public IEnumerable<string> LikedArts { get; set; } = new List<string>();
-
-        public IEnumerable<ArtistArt> ArtistArts { get; set; } = new List<ArtistArt>();
+        public ICollection<Likes> Likes { get; set; } = new List<Likes>();
 
     }
 }

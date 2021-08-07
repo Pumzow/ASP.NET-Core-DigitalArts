@@ -5,6 +5,7 @@ namespace DigitalArts.Models
     public class ArtViewModel
     {
         public string Id { get; set; }
+        public string ArtistId { get; set; }
         public string ArtistFullName { get; set; }
         public string Description { get; set; }
         public string Tags { get; set; }

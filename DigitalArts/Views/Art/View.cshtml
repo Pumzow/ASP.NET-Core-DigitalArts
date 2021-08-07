@@ -3,16 +3,41 @@
     ViewData["Title"] = "View";
 }
 
-<div class="card mb-5">
-    <h4 class="card-title text-center" style="margin-top: 25px;">@Model.ArtistFullName</h4>
-    <h6 class="card-title text-center">@Model.DatePublished</h6>
-    <img class="card-img-top" src="@Model.Image" alt="Can't load the image" style="object-fit: scale-down; height:650px;">
-    <h6 class="card-title text-center" style="margin-top: 25px;">@Model.Tags</h6>
-    <h6 class="card-title text-center" style="margin-left:25px; margin-right:25px;">@Model.Description</h6>
-    <div class="center">
-        <button type="button" class="btn btn-dark" style="width: 150px; text-align: center">
-            <h6 class="card-title text-center"> @Model.Likes Likes</h6>
-        </button>
+<div class="jumbotron">
+    <div class="card mb-5">
+        <h4 class="card-title text-center" style="margin-top: 25px;">@Model.ArtistFullName</h4>
+        <h6 class="card-title text-center">@Model.DatePublished</h6>
+        <img class="card-img-top" src="@Model.Image" alt="Can't load the image" style="object-fit: scale-down; height:650px;">
+        <h6 class="card-title text-center" style="margin-top: 25px;">@Model.Tags</h6>
+        <h6 class="card-title text-center" style="margin-left:25px; margin-right:25px;">@Model.Description</h6>
+        <div class="center">
+            @{
+                var userId = User.GetId();
+                var userIsAdmin = User.IsAdmin();
+
+                if (Model.ArtistId == userId || userIsAdmin)
+                {
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <button id="like-button" type="button" class="btn btn-dark" style="width: 150px; text-align: center">
+                            <a class="nav-link text-light" asp-controller="Art" asp-action="Like" asp-route-id="@Model.Id"> @Model.Likes Likes </a>
+                        </button>
+                        <button type="button" class="btn btn-dark" style="width: 150px; text-align: center">
+                            <a class="nav-link text-light" asp-controller="Art" asp-action="Edit" asp-route-id="@Model.Id"> Edit </a>
+                        </button>
+                        <button type="button" class="btn btn-dark" style="width: 150px; text-align: center">
+                            <a class="nav-link text-light" asp-controller="Art" asp-action="Delete" asp-route-id="@Model.Id"> Delete </a>
+                        </button>
+                    </div>
+                }
+                else
+                {
+                    <button id="like-button" type="button" class="btn btn-dark" style="width: 150px; text-align: center">
+                        @Model.Likes Likes
+                    </button>
+                }
+            }
+
+        </div>
     </div>
 </div>
 

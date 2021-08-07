@@ -37,7 +37,7 @@ namespace DigitalArts.Services.Gallery
             artsQuery = sorting switch
             {
                 GallerySorting.DatePublished => artsQuery.OrderByDescending(c => c.DatePublished),
-                GallerySorting.Likes => artsQuery.OrderByDescending(a => a.Likes)
+                GallerySorting.Likes => artsQuery.OrderByDescending(a => a.Likes.Count())
             };
 
             var totalArts = artsQuery.Count();
@@ -63,7 +63,7 @@ namespace DigitalArts.Services.Gallery
                     Id = a.Id,
                     ArtistId = a.ArtistId,
                     Tags = a.Tags,
-                    Likes = a.Likes,
+                    Likes = a.Likes.Count(),
                     DatePublished = a.DatePublished,
                     Image = a.Image
                 })

@@ -50,6 +50,7 @@ namespace DigitalArts
             services.AddTransient<IArtistService, ArtistService>();
             services.AddTransient<IGalleryService, GalleryService>();
             services.AddTransient<IHomeService, HomeService>();
+           // services.AddTransient<IArtLikesService, ArtLikesService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

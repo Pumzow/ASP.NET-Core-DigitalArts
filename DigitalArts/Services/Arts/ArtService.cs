@@ -39,8 +39,7 @@ namespace DigitalArts.Services.Arts
                     ArtistId = a.ArtistId,
                     Description = a.Description,
                     Tags = a.Tags,
-                    Likes = a.Likes,
-                    Dislikes = a.Dislikes,
+                    Likes = a.Likes.Count(),
                     DatePublished = a.DatePublished,
                     Image = a.Image
                 })
@@ -76,6 +75,42 @@ namespace DigitalArts.Services.Arts
             this.data.SaveChanges();
 
             return true;
+        }
+
+        public int Like(string ArtId, string ArtistId)
+        {
+            var art = this.data.Arts
+                .FirstOrDefault(a => a.Id == ArtId && a.ArtistId == ArtistId);
+            var artist = this.data.Artists
+                .FirstOrDefault(a => a.Id == ArtistId);
+            var dataLike = this.data.Likes
+                .FirstOrDefault(l => l.ArtId == ArtId && l.ArtistId == ArtistId);
+
+            var localLike = new Likes();
+            localLike.Art = art;
+            localLike.ArtId = ArtId;
+            localLike.Artist = artist;
+            localLike.ArtistId = ArtistId;
+
+            if (art != null)
+            {
+                if (localLike != null && dataLike != null)
+                {
+                    art.Likes.Remove(dataLike);
+                }
+                else
+                {
+                    art.Likes.Add(localLike);
+                }
+            }
+            else
+            {
+                return -1;
+            }
+
+            data.SaveChanges();
+
+            return art.Likes.Count();
         }
     }
 }

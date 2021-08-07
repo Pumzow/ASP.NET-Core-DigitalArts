@@ -17,5 +17,9 @@
             string Tags);
         bool Delete(
             string Id);
+
+        int Like(
+            string ArtId,
+            string ArtistId);
     }
 }

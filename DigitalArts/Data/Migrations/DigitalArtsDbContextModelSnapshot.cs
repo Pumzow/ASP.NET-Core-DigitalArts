@@ -37,15 +37,9 @@ namespace DigitalArts.Data.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Dislikes")
-                        .HasColumnType("int");
-
                     b.Property<string>("Image")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Likes")
-                        .HasColumnType("int");
 
                     b.Property<string>("Tags")
                         .HasColumnType("nvarchar(max)");
@@ -140,19 +134,19 @@ namespace DigitalArts.Data.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("DigitalArts.Data.Models.ArtistArt", b =>
+            modelBuilder.Entity("DigitalArts.Data.Models.Likes", b =>
                 {
-                    b.Property<string>("ArtistId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("ArtId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("ArtistId", "ArtId");
+                    b.Property<string>("ArtistId")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.HasIndex("ArtId");
+                    b.HasKey("ArtId", "ArtistId");
 
-                    b.ToTable("ArtistArts");
+                    b.HasIndex("ArtistId");
+
+                    b.ToTable("Likes");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -290,16 +284,16 @@ namespace DigitalArts.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("DigitalArts.Data.Models.ArtistArt", b =>
+            modelBuilder.Entity("DigitalArts.Data.Models.Likes", b =>
                 {
                     b.HasOne("DigitalArts.Data.Models.Art", "Art")
-                        .WithMany()
+                        .WithMany("Likes")
                         .HasForeignKey("ArtId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("DigitalArts.Data.Models.Artist", "Artist")
-                        .WithMany("ArtistArts")
+                        .WithMany("Likes")
                         .HasForeignKey("ArtistId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -360,9 +354,14 @@ namespace DigitalArts.Data.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("DigitalArts.Data.Models.Art", b =>
+                {
+                    b.Navigation("Likes");
+                });
+
             modelBuilder.Entity("DigitalArts.Data.Models.Artist", b =>
                 {
-                    b.Navigation("ArtistArts");
+                    b.Navigation("Likes");
                 });
 #pragma warning restore 612, 618
         }
