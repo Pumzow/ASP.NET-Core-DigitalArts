@@ -15,7 +15,6 @@
                     <label asp-for="ArtistFullName"></label>
                     <select asp-for="ArtistFullName" class="form-control">
                         <option value="">All</option>
-
                         @foreach (var artist in Model.Artists)
                         {
                             <option value="@artist">@artist</option>
@@ -23,12 +22,10 @@
                     </select>
                 </div>
             </div>
-
             <div class="form-group col-md-4">
                 <label asp-for="SearchTag"></label>
                 <input asp-for="SearchTag" class="form-control" placeholder="Aesthetic...">
             </div>
-
             <div class="form-group col-md-4">
                 <div class="form-group">
                     <label asp-for="Sorting"></label>
@@ -37,6 +34,9 @@
                         <option value="1">Likes</option>
                     </select>
                 </div>
+            </div>
+            <div class="form-group col-md-4">
+                    <button class="btn btn-dark" onclick="refreshPage()"> Filter </button>
             </div>
         </div>
     </form>
@@ -101,3 +101,9 @@
         </div>
     </div>
 </div>
+
+<script>
+    function refreshPage() {
+        localtion.reload();
+    }
+</script>
