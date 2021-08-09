@@ -2,6 +2,7 @@
 using DigitalArts.Services.Gallery;
 using DigitalArts.Services.Artist;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DigitalArts.Controllers
 {
@@ -15,7 +16,7 @@ namespace DigitalArts.Controllers
            this.gallery = gallery;
            this.artists = artists;
         }
-
+        [Authorize]
         public ActionResult Index([FromQuery] GalleryArtsQueryModel query)
         {
 

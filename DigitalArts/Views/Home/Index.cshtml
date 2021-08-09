@@ -6,6 +6,8 @@
     ViewData["Title"] = "Home Page";
 }
 
+<partial name="_NotificationsPartial" />
+
 <div class="jumbotron">
     @if (!SignInManager.IsSignedIn(User))
     {
@@ -16,7 +18,6 @@
     }
     else
     {
-
         @if (!Model.Arts.Any())
         {
             <h1 class="display-4">Welcome to DigitalArts</h1>
@@ -28,9 +29,7 @@
         }
         else
         {
-            <div class="mb-5"></div>
-
-            <h1 style="text-align: center; margin-bottom: 75px;"> Top 3 Arts </h1>
+            <h1 style="text-align: center; margin-bottom: 75px;"> Most liked </h1>
 
             <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
                 <ol class="carousel-indicators">
@@ -62,8 +61,6 @@
                     <span class="sr-only">Next</span>
                 </a>
             </div>
-
-            <div class="mb-5"></div>
         }
     }
     <div class="text-center">

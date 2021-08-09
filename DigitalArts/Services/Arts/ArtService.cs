@@ -80,7 +80,7 @@ namespace DigitalArts.Services.Arts
         public int Like(string ArtId, string ArtistId)
         {
             var art = this.data.Arts
-                .FirstOrDefault(a => a.Id == ArtId && a.ArtistId == ArtistId);
+                .FirstOrDefault(a => a.Id == ArtId);
             var artist = this.data.Artists
                 .FirstOrDefault(a => a.Id == ArtistId);
             var dataLike = this.data.Likes

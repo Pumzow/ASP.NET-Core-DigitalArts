@@ -59,6 +59,7 @@ namespace DigitalArts.Controllers
             return RedirectToAction("Index", "Gallery");
         }
 
+        [Authorize]
         public ActionResult View(string id)
         {
             var artistId = this.artists.IdByUser(this.User.GetId());

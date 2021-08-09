@@ -1,0 +1,31 @@
+﻿<h6 class="notification">
+    <button class="closeButton" onclick="closeNotification(this)">X</button>
+    <img class="notificationIcon" src="~/Resources/NotificationIcon.png" alt="Notification" height="15px" />
+
+    DRYGON Studio is currently developing a new mobile game called "The Forest Bonshi". Join us on <a href="https://discord.gg/dXuJHTf"  target="_blank"> discord </a> for more information.
+</h6>
+
+
+<style>
+    .notification {
+        text-align: left;
+        background-color: lightgoldenrodyellow;
+        padding: 15px;
+    }
+
+    .notificationIcon {
+        padding: 15px;
+    }
+
+    .closeButton {
+        float: right;
+        background-color: lightyellow;
+    }
+</style>
+
+<script>
+    function closeNotification(closeButton) {
+
+        closeButton.parentElement.remove();
+    }
+</script>
