@@ -64,6 +64,7 @@ namespace DigitalArts.Services.Gallery
                     ArtistId = a.ArtistId,
                     Tags = a.Tags,
                     Likes = a.Likes.Count(),
+                    Description = a.Description,
                     DatePublished = a.DatePublished,
                     Image = a.Image
                 })

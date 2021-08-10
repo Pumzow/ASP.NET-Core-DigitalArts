@@ -18,7 +18,7 @@ namespace DigitalArts
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration) 
+        public Startup(IConfiguration configuration)
             => Configuration = configuration;
 
         public IConfiguration Configuration { get; }
@@ -31,7 +31,7 @@ namespace DigitalArts
             services.AddDatabaseDeveloperPageExceptionFilter();
 
             services
-                .AddDefaultIdentity<Artist>(options => 
+                .AddDefaultIdentity<Artist>(options =>
                 {
                     options.Password.RequireDigit = true;
                     options.Password.RequireNonAlphanumeric = false;
@@ -50,7 +50,6 @@ namespace DigitalArts
             services.AddTransient<IArtistService, ArtistService>();
             services.AddTransient<IGalleryService, GalleryService>();
             services.AddTransient<IHomeService, HomeService>();
-           // services.AddTransient<IArtLikesService, ArtLikesService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -76,6 +75,10 @@ namespace DigitalArts
                 .UseAuthorization()
                 .UseEndpoints(endpoints =>
                 {
+                    endpoints.MapControllerRoute(
+                        name: "Areas",
+                        pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+                    );
                     endpoints.MapDefaultControllerRoute();
                     endpoints.MapRazorPages();
                 });

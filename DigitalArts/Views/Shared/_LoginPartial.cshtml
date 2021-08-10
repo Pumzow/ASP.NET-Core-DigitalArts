@@ -7,6 +7,19 @@
     @if (SignInManager.IsSignedIn(User))
     {
         <div class="btn-group" role="group" aria-label="Basic example">
+            @{
+                var userId = User.GetId();
+                var userIsAdmin = User.IsAdmin();
+
+                @if (userIsAdmin)
+                {
+                    <button type="button" class="btn btn-dark">
+                        <a class="nav-link text-light" asp-area="Administration" asp-controller="Arts" asp-action="Index">
+                            <img src="~/Resources/AdministrationIcon.png" alt="Profile" height="25px" /> Administration
+                        </a>
+                    </button>
+                }
+            }
             <button type="button" class="btn btn-dark">
                 <a class="nav-link text-light" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">
                     <img src="~/Resources/ProfileIcon.png" alt="Profile" height="25px" /> @User.Identity.Name
@@ -18,25 +31,9 @@
                 </a>
             </button>
         </div>
-        @*
-            <li class="nav-item">
-                <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity.Name!</a>
-            </li>
-            <li class="nav-item">
-                <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                    <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
-                </form>
-            </li>*@
     }
     else
     {
-        @*
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Register</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
-        </li>*@
         <div class="btn-group" role="group" aria-label="Basic example">
             <button type="button" class="btn btn-dark">
                 <a class="nav-link text-light" asp-area="Identity" asp-page="/Account/Register">

@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using DigitalArts.Data;
 using DigitalArts.Data.Models;
+using DigitalArts.Models.Arts;
+using DigitalArts.Services.Gallery;
 
 namespace DigitalArts.Services.Arts
 {
@@ -63,18 +66,18 @@ namespace DigitalArts.Services.Arts
 
         public bool Delete(string Id)
         {
-            var artData = this.data.Arts.Find(Id);
+            var artData = this.data.Arts.FirstOrDefault(a => a.Id == Id);
 
-            if (artData == null)
+            if (artData != null)
             {
-                return false;
+
+                this.data.Remove(artData);
+
+                this.data.SaveChanges();
+
+                return true;
             }
-
-            this.data.Remove(artData);
-
-            this.data.SaveChanges();
-
-            return true;
+            return false;
         }
 
         public int Like(string ArtId, string ArtistId)

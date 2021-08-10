@@ -1,0 +1,70 @@
+﻿@model IEnumerable<GalleryArtServiceModel>
+
+@{
+    ViewBag.Title = "Arts Administration";
+}
+
+<div class="jumbotron">
+
+    <div class="btn-group" role="group" aria-label="Basic example">
+        <button type="button" class="btn btn-dark">
+            <a class="nav-link text-light" asp-area="Administration" asp-controller="Arts" asp-action="Index"> Arts </a>
+        </button>
+        <button type="button" class="btn btn-dark">
+            <a class="nav-link text-light" asp-area="Administration" asp-controller="Artists" asp-action="Index"> Artists </a>
+        </button>
+    </div>
+
+    <h1 style="text-align:center;">Arts</h1>
+
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th class="columnSize" scope="col">Id</th>
+                <th class="columnSize" scope="col">Image</th>
+                <th class="columnSize" scope="col">Artist</th>
+                <th class="columnSize" scope="col">Likes</th>
+                <th class="columnSize" scope="col">Tags</th>
+                <th class="columnSize" scope="col">Description</th>
+                <th class="columnSize" scope="col">Date Published</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var art in Model)
+            {
+                <tr>
+                    <td scope="col">@art.Id</td>
+                    <td scope="col"><img src="@art.Image" alt="Art image" style="object-fit: cover; height: 150px;" /></td>
+                    <td scope="col">@art.ArtistFullName</td>
+                    <td scope="col">@art.Likes</td>
+                    <td scope="col">@art.Tags</td>
+                    <td scope="col">@art.Description</td>
+                    <td scope="col">@art.DatePublished</td>
+                </tr>
+                <tr>
+                    <td scope="col">
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <button type="button" class="btn btn-dark">
+                                <a class="nav-link text-light" asp-area="" asp-controller="Art" asp-action="View" asp-route-id="@art.Id" title="Manage"> View </a>
+                            </button>
+                            <button type="button" class="btn btn-dark">
+                                <a class="nav-link text-light" asp-area="" asp-controller="Art" asp-action="Edit" asp-route-id="@art.Id" title="Manage"> Edit </a>
+                            </button>
+                            <button type="button" class="btn btn-dark">
+                                <a class="nav-link text-light" asp-area="" asp-controller="Art" asp-action="Delete" asp-route-id="@art.Id"> Delete </a>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<style>
+    .columnSize {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+</style>

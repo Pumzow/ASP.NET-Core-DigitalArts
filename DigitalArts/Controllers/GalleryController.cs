@@ -27,7 +27,7 @@ namespace DigitalArts.Controllers
                 query.ArtistFullName,
                 query.SearchTag);
 
-            var artists = this.artists.All();
+            var artists = this.artists.AllByName();
 
             query.Artists = artists;
             query.TotalArts = queryResult.TotalArts;

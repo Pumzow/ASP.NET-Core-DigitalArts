@@ -1,0 +1,63 @@
+﻿@model IEnumerable<ArtistServiceModel>
+
+@{
+    ViewBag.Title = "Artists Administration";
+}
+
+<div class="jumbotron">
+
+    <div class="btn-group" role="group" aria-label="Basic example">
+        <button type="button" class="btn btn-dark">
+            <a class="nav-link text-light" asp-area="Administration" asp-controller="Arts" asp-action="Index"> Arts </a>
+        </button>
+        <button type="button" class="btn btn-dark">
+            <a class="nav-link text-light" asp-area="Administration" asp-controller="Artists" asp-action="Index"> Artists </a>
+        </button>
+    </div>
+
+    <h1 style="text-align:center;">Artists</h1>
+
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th class="columnSize" scope="col">Id</th>
+                <th class="columnSize" scope="col">Image</th>
+                <th class="columnSize" scope="col">Username</th>
+                <th class="columnSize" scope="col">Full name</th>
+                <th class="columnSize" scope="col">Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var artist in Model)
+            {
+                <tr>
+                    <td scope="col">@artist.Id</td>
+                    <td scope="col"><img src="@artist.ProfileImage" alt="Art image" style="object-fit: cover; height: 150px;" /></td>
+                    <td scope="col">@artist.ArtistUsername</td>
+                    <td scope="col">@artist.FirstName @artist.LastName</td>
+                    <td scope="col">@artist.Email</td>
+                </tr>
+                <tr>
+                    <td scope="col">
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <button type="button" class="btn btn-dark">
+                                <a class="nav-link text-light" asp-area="" asp-controller="Art" asp-action="View" asp-route-id="@artist.Id" title="Manage"> View </a>
+                            </button>
+                            <button type="button" class="btn btn-dark">
+                                <a class="nav-link text-light" asp-area="Administration" asp-controller="Artists" asp-action="Delete" asp-route-id="@artist.Id"> Delete </a>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<style>
+    .columnSize {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+</style>

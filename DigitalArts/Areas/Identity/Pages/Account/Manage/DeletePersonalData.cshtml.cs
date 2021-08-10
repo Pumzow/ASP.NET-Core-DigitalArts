@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using DigitalArts.Data;
 using DigitalArts.Data.Models;
+using DigitalArts.Infrastructure;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -63,7 +64,7 @@ namespace DigitalArts.Areas.Identity.Pages.Account.Manage
             }
 
             RequirePassword = await this.userManager.HasPasswordAsync(user);
-            if (RequirePassword)
+            if (RequirePassword && !User.IsAdmin())
             {
                 if (!await this.userManager.CheckPasswordAsync(user, Input.Password))
                 {
@@ -93,7 +94,7 @@ namespace DigitalArts.Areas.Identity.Pages.Account.Manage
 
             await this.signInManager.SignOutAsync();
 
-            this.logger.LogInformation("User with ID '{UserId}' deleted themselves.", userId);
+            this.logger.LogInformation("User with ID '{UserId}' has been deleted.", userId);
 
             return Redirect("~/");
         }

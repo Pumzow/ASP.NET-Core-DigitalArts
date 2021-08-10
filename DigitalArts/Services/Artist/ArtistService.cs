@@ -36,7 +36,7 @@ namespace DigitalArts.Services.Artist
             return fullName;
         }
 
-        public IEnumerable<string> All()
+        public IEnumerable<string> AllByName()
         {
             var artists = this.data
                 .Artists
@@ -57,6 +57,53 @@ namespace DigitalArts.Services.Artist
             }
 
             return resultArtists;
+        }
+
+        public IEnumerable<ArtistServiceModel> All()
+        {
+            var artists = this.data
+                .Artists
+                .Select(a => new ArtistServiceModel
+                {
+                    Id = a.Id,
+                    FirstName = a.FirstName,
+                    LastName = a.LastName,
+                    ProfileImage = a.ProfileImage,
+                    Email = a.Email,
+                    ArtistUsername = a.ArtistUsername
+                })
+                .OrderBy(a => a.FirstName)
+                .ThenBy(a => a.LastName)
+                .ToList();
+
+            return artists;
+        }
+
+        public bool Delete(string artistId)
+        {
+            var artist = this.data
+                .Artists
+                .FirstOrDefault(a => a.Id == artistId);
+
+            if (artist != null)
+            {
+                var arts = data.Arts
+                    .Where(a => a.ArtistId == artist.Id)
+                    .ToList();
+
+                foreach (var art in arts)
+                {
+                    data.Arts.Remove(art);
+                }
+
+                data.Artists.Remove(artist);
+
+                data.SaveChanges();
+
+                return true;
+            }
+
+            return false;
         }
     }
 }

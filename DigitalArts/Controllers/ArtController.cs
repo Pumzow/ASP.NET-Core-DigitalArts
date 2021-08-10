@@ -142,7 +142,7 @@ namespace DigitalArts.Controllers
                 art.Description,
                 art.Tags);
 
-            return RedirectToAction("Index", "Gallery");
+            return RedirectToAction("View", new { id = id });
         }
         [Authorize]
         public IActionResult Delete(string id)
