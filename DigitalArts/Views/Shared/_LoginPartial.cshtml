@@ -21,7 +21,7 @@
                 }
             }
             <button type="button" class="btn btn-dark">
-                <a class="nav-link text-light" asp-area="" asp-controller="Artist" asp-action="Index" asp-route-id="@userId">
+                <a class="nav-link text-light" asp-area="" asp-controller="Artist" asp-action="View" asp-route-id="@User.Identity.Name">
                     <img src="~/Resources/ProfileIcon.png" height="25px" /> @User.Identity.Name
                 </a>
             </button>

@@ -82,6 +82,7 @@ namespace DigitalArts
                     endpoints.MapDefaultControllerRoute();
                     endpoints.MapRazorPages();
                 });
+
         }
     }
 }

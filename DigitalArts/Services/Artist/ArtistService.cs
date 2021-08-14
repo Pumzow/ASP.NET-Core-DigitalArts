@@ -18,6 +18,12 @@ namespace DigitalArts.Services.Artist
                 .Where(a => a.Id == Id)
                 .Select(a => a.Id)
                 .FirstOrDefault();
+        public string IdByUsername(string Username)
+            => this.data
+                .Artists
+                .Where(a => a.UserName == Username)
+                .Select(a => a.Id)
+                .FirstOrDefault();
 
         public string FullNameByUser(string Id)
         { 
@@ -129,5 +135,6 @@ namespace DigitalArts.Services.Artist
 
             return false;
         }
+
     }
 }

@@ -5,6 +5,7 @@ namespace DigitalArts.Services.Artist
     public interface IArtistService
     {
         public string IdByUser(string Id);
+        public string IdByUsername(string Username);
         public string FullNameByUser(string Id);
 
         public IEnumerable<string> AllByName();
