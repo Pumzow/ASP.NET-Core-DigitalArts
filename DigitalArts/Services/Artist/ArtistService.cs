@@ -79,11 +79,35 @@ namespace DigitalArts.Services.Artist
             return artists;
         }
 
-        public bool Delete(string artistId)
+        public ArtistServiceModel UserFullDetails(string Id)
+        {
+
+            var artistData = this.data.Artists
+                .FirstOrDefault(a => a.Id == Id);
+
+            if (artistData == null)
+            {
+                return null;
+            }
+
+            ArtistServiceModel artist = new ArtistServiceModel
+            {
+                Id = artistData.Id,
+                FirstName = artistData.FirstName,
+                LastName = artistData.LastName,
+                ProfileImage = artistData.ProfileImage,
+                Email = artistData.Email,
+                ArtistUsername = artistData.ArtistUsername
+            };
+
+            return artist;
+        }
+
+        public bool Delete(string Id)
         {
             var artist = this.data
                 .Artists
-                .FirstOrDefault(a => a.Id == artistId);
+                .FirstOrDefault(a => a.Id == Id);
 
             if (artist != null)
             {

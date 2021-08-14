@@ -1,0 +1,72 @@
+﻿@model ArtistArtsQueryModel
+@{
+    ViewData["Title"] = "Artist";
+}
+
+<partial name="_NotificationsPartial" />
+<div class="jumbotron">
+    <div class="row mb-5">
+        <div class="col-md-4">
+            <h1 class="text-center"> Profile </h1>
+            <hr />
+
+            <img src="@Model.ArtistImage" alt="Profile Picture" Profile picture" style="width: 100%" />
+            <h3> @Model.ArtistFullname</h3>
+            <h6> @Model.ArtistUsername</h6>
+            <a asp-area="Identity" asp-page="/Account/Manage/Index"> Settings </a>
+        </div>
+        <div class="col-md-8">
+            <div>
+                <h1 class="text-center"> Arts </h1>
+                <hr />
+
+                @{
+                    var previousPage = Model.CurrentPage - 1;
+                    if (previousPage < 1)
+                    {
+                        previousPage = 1;
+                    }
+
+                    var maxPage = Math.Ceiling((double)Model.TotalArts / ArtistArtsQueryModel.ArtsPerPage);
+                }
+
+                @if (!Model.Arts.Any())
+                {
+                    <h2 class="text-center"> Artist hasn't posted any arts. </h2>
+                }
+
+                <div class="row">
+                    @foreach (var art in Model.Arts)
+                    {
+                        <div class="col-md-6">
+                            <a asp-controller="Art" asp-action="View" asp-route-id="@art.Id" style="text-decoration:none; color: black;">
+                                <div class="card mb-3">
+                                    <img class="card-img-top" src="@art.Image" alt="Can't load the image" style="object-fit: cover; height: 300px;">
+                                    <div class="card-body text-left">
+                                        <h7 class="card-title text-left">@art.DatePublished</h7><br>
+                                        <h7 class="card-title text-left">@art.Likes Likes</h7><br>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    }
+                </div>
+
+                <div class="row mb-5">
+                    <div class="col-md-6">
+                        <a class="btn btn-dark float-left position-absolute @(Model.CurrentPage == 1 ? "disabled" : string.Empty)"
+                           asp-controller="Artist"
+                           asp-action="Index"
+                           asp-route-currentPage="@previousPage"> << </a>
+                    </div>
+                    <div class="col-md-6">
+                        <a class="btn btn-dark float-right @(Model.CurrentPage == maxPage ? "disabled" : string.Empty)"
+                           asp-controller="Artist"
+                           asp-action="Index"
+                           asp-route-currentPage="@(Model.CurrentPage + 1)"> >> </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

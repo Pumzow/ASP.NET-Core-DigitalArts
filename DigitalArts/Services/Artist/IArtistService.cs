@@ -9,6 +9,7 @@ namespace DigitalArts.Services.Artist
 
         public IEnumerable<string> AllByName();
         public IEnumerable<ArtistServiceModel> All();
+        public ArtistServiceModel UserFullDetails(string Id);
 
         public bool Delete(string Id);
     }

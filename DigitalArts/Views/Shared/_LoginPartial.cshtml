@@ -15,19 +15,19 @@
                 {
                     <button type="button" class="btn btn-dark">
                         <a class="nav-link text-light" asp-area="Administration" asp-controller="Arts" asp-action="Index">
-                            <img src="~/Resources/AdministrationIcon.png" alt="Profile" height="25px" /> Administration
+                            <img src="~/Resources/AdministrationIcon.png" height="25px" /> Administration
                         </a>
                     </button>
                 }
             }
             <button type="button" class="btn btn-dark">
-                <a class="nav-link text-light" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">
-                    <img src="~/Resources/ProfileIcon.png" alt="Profile" height="25px" /> @User.Identity.Name
+                <a class="nav-link text-light" asp-area="" asp-controller="Artist" asp-action="Index" asp-route-id="@userId">
+                    <img src="~/Resources/ProfileIcon.png" height="25px" /> @User.Identity.Name
                 </a>
             </button>
             <button type="button" class="btn btn-dark">
                 <a class="nav-link text-light" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                    <img src="~/Resources/LogoutIcon.png" alt="Profile" height="25px" /> Log out
+                    <img src="~/Resources/LogoutIcon.png" height="25px" /> Log out
                 </a>
             </button>
         </div>
@@ -37,12 +37,12 @@
         <div class="btn-group" role="group" aria-label="Basic example">
             <button type="button" class="btn btn-dark">
                 <a class="nav-link text-light" asp-area="Identity" asp-page="/Account/Register">
-                    <img src="~/Resources/RegisterIcon.png" alt="Profile" height="25px" /> Register
+                    <img src="~/Resources/RegisterIcon.png" height="25px" /> Register
                 </a>
             </button>
             <button type="button" class="btn btn-dark">
                 <a class="nav-link text-light" asp-area="Identity" asp-page="/Account/Login">
-                    <img src="~/Resources/LoginIcon.png" alt="Profile" height="25px" /> Login
+                    <img src="~/Resources/LoginIcon.png" height="25px" /> Login
                 </a>
             </button>
         </div>

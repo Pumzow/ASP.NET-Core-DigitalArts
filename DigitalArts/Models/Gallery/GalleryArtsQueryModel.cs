@@ -7,7 +7,7 @@ namespace DigitalArts.Models
 {
     public class GalleryArtsQueryModel
     {
-        public const int ArtsPerPage = 3;
+        public const int ArtsPerPage = 9;
 
         public string ArtistFullName { get; init; }
 

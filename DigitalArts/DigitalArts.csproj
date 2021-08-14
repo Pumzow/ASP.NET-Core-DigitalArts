@@ -7,20 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Areas\Administration\**" />
-    <Content Remove="Areas\Administration\**" />
-    <EmbeddedResource Remove="Areas\Administration\**" />
-    <None Remove="Areas\Administration\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Include="Areas\Administration\AdminConstants.cs" />
-    <Compile Include="Areas\Administration\Controllers\AdministrationController.cs" />
-    <Compile Include="Areas\Administration\Controllers\ArtistsController.cs" />
-    <Compile Include="Areas\Administration\Controllers\ArtsController.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="5.0.3" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.8" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="5.0.8" />
@@ -36,13 +22,6 @@
   <ItemGroup>
     <Folder Include="Areas\Administration\Data\" />
     <Folder Include="Areas\Administration\Models\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="Areas\Administration\Views\Artists\Index.cshtml" />
-    <None Include="Areas\Administration\Views\Arts\Index.cshtml" />
-    <None Include="Areas\Administration\Views\_ViewImports.cshtml" />
-    <None Include="Areas\Administration\Views\_ViewStart.cshtml" />
   </ItemGroup>
 
 </Project>

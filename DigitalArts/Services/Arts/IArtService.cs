@@ -1,4 +1,7 @@
-﻿namespace DigitalArts.Services.Arts
+﻿using DigitalArts.Models.Artist;
+using System.Collections.Generic;
+
+namespace DigitalArts.Services.Arts
 {
     public interface IArtService
     {
@@ -21,5 +24,10 @@
         int Like(
             string ArtId,
             string ArtistId);
+
+        ArtistArtsQueryModel AllById(
+            string Id,
+            int artsPerPage,
+            int currentPage);
     }
 }

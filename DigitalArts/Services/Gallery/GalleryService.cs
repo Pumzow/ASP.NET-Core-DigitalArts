@@ -73,10 +73,6 @@ namespace DigitalArts.Services.Gallery
             foreach (var art in arts)
             {
                 var artistFullName = this.artists.FullNameByUser(art.ArtistId);
-                if (String.IsNullOrWhiteSpace(artistFullName))
-                {
-                    //this.ModelState.AddModelError(nameof(artistFullName), "Artist does not have a name.");
-                }
 
                 art.ArtistFullName = artistFullName;
             }

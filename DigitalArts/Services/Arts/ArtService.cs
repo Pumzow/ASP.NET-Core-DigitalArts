@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using DigitalArts.Data;
 using DigitalArts.Data.Models;
+using DigitalArts.Models.Artist;
 using DigitalArts.Models.Arts;
 using DigitalArts.Services.Gallery;
 
@@ -114,6 +115,41 @@ namespace DigitalArts.Services.Arts
             data.SaveChanges();
 
             return art.Likes.Count();
+        }
+
+        public ArtistArtsQueryModel AllById(string Id, int artsPerPage, int currentPage)
+        {
+            var artsQuery = this.data.Arts.AsQueryable();
+
+            var totalArts = artsQuery.Count();
+
+            var arts = GetArts(Id, artsQuery
+                .Skip((currentPage - 1) * artsPerPage)
+                .Take(artsPerPage));
+
+            return new ArtistArtsQueryModel
+            {
+                TotalArts = totalArts,
+                CurrentPage = currentPage,
+                Arts = arts
+            };
+        }
+        private IEnumerable<ArtViewServiceModel> GetArts(string Id, IQueryable<Art> artQuery)
+        {
+            var arts = artQuery
+                .Where(a => a.ArtistId == Id)
+                .Select(a => new ArtViewServiceModel
+                {
+                    Id = a.Id,
+                    Description = a.Description,
+                    Tags = a.Tags,
+                    Likes = a.Likes.Count(),
+                    DatePublished = a.DatePublished,
+                    Image = a.Image
+                })
+                .ToList();
+
+            return arts;
         }
     }
 }
