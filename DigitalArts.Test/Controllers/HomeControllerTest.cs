@@ -12,6 +12,9 @@ namespace DigitalArts.Test.Controllers
             => MyController<HomeController>
                 .Instance()
                 .Calling(c => c.Index())
+                .ShouldHave()
+                .ValidModelState()
+                .AndAlso()
                 .ShouldReturn()
                 .View(view => view
                     .WithModelOfType<IndexViewModel>());
@@ -20,6 +23,9 @@ namespace DigitalArts.Test.Controllers
             => MyController<HomeController>
                 .Instance()
                 .Calling(c => c.Error())
+                .ShouldHave()
+                .ValidModelState()
+                .AndAlso()
                 .ShouldReturn()
                 .View();
     }

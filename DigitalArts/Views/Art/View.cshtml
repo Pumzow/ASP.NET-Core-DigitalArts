@@ -36,7 +36,9 @@
                 else
                 {
                     <button id="like-button" type="button" class="btn btn-dark" style="width: 150px; text-align: center">
-                        @Model.Likes Likes
+                        <a class="nav-link text-light" asp-controller="Art" asp-action="Like" asp-route-id="@Model.Id">
+                            @Model.Likes Likes
+                        </a>
                     </button>
                 }
             }

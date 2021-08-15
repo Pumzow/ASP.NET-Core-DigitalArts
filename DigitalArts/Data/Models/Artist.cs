@@ -15,10 +15,7 @@ namespace DigitalArts.Data.Models
         [MaxLength(LastNameMaxLength)]
         public string LastName { get; set; }
         [Required]
-        public string ProfileImage { get; set; }/*
-        [Required]
-        [RegularExpression(EmailAddresslRegularExpression)]
-        public string Email { get; set; }*/
+        public string ProfileImage { get; set; }
         [Required]
         [MaxLength(UsernameMaxLength)]
         public string ArtistUsername { get; set; }

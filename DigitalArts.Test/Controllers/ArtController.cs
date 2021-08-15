@@ -47,9 +47,14 @@ namespace DigitalArts.Test.Controllers
         [Fact]
         public void EditShouldReturnView()
             => MyController<DigitalArts.Controllers.ArtController>
-                .Instance(controller => controller
-                    .WithData(TenArts))
-                .Calling(a => a.Edit(TenArts.First().Id))
+                .Instance()
+                .WithData(OneArt)
+                .Calling(a => a.Edit("RandomId"))
+            .ShouldHave()
+                .ActionAttributes(attributes => attributes
+                    .RestrictingForAuthorizedRequests())
+                .ValidModelState()
+            .AndAlso()
                 .ShouldReturn()
                 .View();
     }

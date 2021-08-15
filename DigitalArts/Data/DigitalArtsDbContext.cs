@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using DigitalArts.Data.Models;
+﻿using DigitalArts.Data.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,6 +11,7 @@ namespace DigitalArts.Data
         public DbSet<Art> Arts { get; init; }
         public DbSet<Likes> Likes { get; set; }
         public DbSet<Notiffication> Notiffications { get; set; }
+        public DbSet<Bug> Bugs { get; set; }
 
         public DigitalArtsDbContext(DbContextOptions<DigitalArtsDbContext> options)
             : base(options)

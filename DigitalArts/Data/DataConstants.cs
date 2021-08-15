@@ -19,5 +19,8 @@
         public const int ArtArtistFullnameMinLength = 7;
         public const int ArtArtistFullnameMaxLength = 73;
         public const int ArtDescriptionLegth = 155;
+
+        public const int BugTitle = 50;
+        public const int BugDescriptionLegth = 200;
     }
 }

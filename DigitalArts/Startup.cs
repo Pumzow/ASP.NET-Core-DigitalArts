@@ -3,6 +3,7 @@ using DigitalArts.Data.Models;
 using DigitalArts.Infrastructure;
 using DigitalArts.Services.Artist;
 using DigitalArts.Services.Arts;
+using DigitalArts.Services.Bug;
 using DigitalArts.Services.Gallery;
 using DigitalArts.Services.Home;
 using DigitalArts.Services.Notiffication;
@@ -52,6 +53,7 @@ namespace DigitalArts
             services.AddTransient<IGalleryService, GalleryService>();
             services.AddTransient<IHomeService, HomeService>();
             services.AddTransient<INotifficationService, NotifficationService>();
+            services.AddTransient<IBugService, BugService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

@@ -1,5 +1,4 @@
-﻿using DigitalArts.Data;
-using DigitalArts.Models.Home;
+﻿using DigitalArts.Models.Home;
 using DigitalArts.Services.Home;
 using Microsoft.AspNetCore.Mvc;
 

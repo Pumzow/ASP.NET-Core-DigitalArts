@@ -1,5 +1,4 @@
 ﻿using DigitalArts.Models.Artist;
-using System.Collections.Generic;
 
 namespace DigitalArts.Services.Arts
 {

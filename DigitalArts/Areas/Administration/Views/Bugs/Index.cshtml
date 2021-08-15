@@ -1,41 +1,37 @@
-﻿@model IEnumerable<NotifficationServiceModel>
+﻿@model IEnumerable<BugServiceModel>
 
 @{
-    ViewBag.Title = "Notiffications Administration";
+    ViewBag.Title = "Bugs Administration";
 }
 
 <div class="jumbotron">
     <partial name="_AdministrationButtons" />
     <hr />
 
-    <h1 style="text-align:center;">Notiffications</h1>
+    <h1 style="text-align:center;">Bugs</h1>
     <hr />
-
-    <button type="button" class="btn btn-dark" style="margin-bottom: 15px">
-        <a class="nav-link text-light" asp-area="Administration" asp-controller="Notiffications" asp-action="Post"> Post </a>
-    </button>
 
     <table class="table table-striped">
         <thead class="thead-dark">
             <tr>
                 <th class="columnSize" scope="col">Id</th>
                 <th class="columnSize" scope="col">Title</th>
-                <th class="columnSize" scope="col">Content</th>
+                <th class="columnSize" scope="col">Description</th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var notiffication in Model.OrderByDescending(n => n.Id))
+            @foreach (var bug in Model.OrderByDescending(b => b.Id))
             {
                 <tr>
-                    <td scope="col">@notiffication.Id</td>
-                    <td scope="col">@notiffication.Title</td>
-                    <td scope="col">@notiffication.Content</td>
+                    <td scope="col">@bug.Id</td>
+                    <td scope="col">@bug.Title</td>
+                    <td scope="col">@bug.Description</td>
                 </tr>
                 <tr>
                     <td scope="col">
                         <div class="btn-group" role="group" aria-label="Basic example">
                             <button type="button" class="btn btn-dark">
-                                <a class="nav-link text-light" asp-area="Administration" asp-controller="Notiffications" asp-action="Delete" asp-route-id="@notiffication.Id"> Delete </a>
+                                <a class="nav-link text-light" asp-area="Administration" asp-controller="Bugs" asp-action="Delete" asp-route-id="@bug.Id"> Delete </a>
                             </button>
                         </div>
                     </td>

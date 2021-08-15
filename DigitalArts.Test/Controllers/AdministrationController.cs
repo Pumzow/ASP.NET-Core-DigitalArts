@@ -31,5 +31,29 @@ namespace DigitalArts.Test.Controllers
             .AndAlso()
                 .ShouldReturn()
                 .View();
+        [Fact]
+        public void NotifficationsShouldReturnView()
+               => MyController<NotifficationsController>
+                .Instance()
+                .Calling(a => a.Index())
+            .ShouldHave()
+                .ActionAttributes(attributes => attributes
+                    .RestrictingForAuthorizedRequests())
+                .ValidModelState()
+            .AndAlso()
+                .ShouldReturn()
+                .View();
+        [Fact]
+        public void BugssShouldReturnView()
+               => MyController<BugsController>
+                .Instance()
+                .Calling(a => a.Index())
+            .ShouldHave()
+                .ActionAttributes(attributes => attributes
+                    .RestrictingForAuthorizedRequests())
+                .ValidModelState()
+            .AndAlso()
+                .ShouldReturn()
+                .View();
     }
 }
