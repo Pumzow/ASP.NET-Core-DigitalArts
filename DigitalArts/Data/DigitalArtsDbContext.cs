@@ -12,6 +12,7 @@ namespace DigitalArts.Data
 
         public DbSet<Art> Arts { get; init; }
         public DbSet<Likes> Likes { get; set; }
+        public DbSet<Notiffication> Notiffications { get; set; }
 
         public DigitalArtsDbContext(DbContextOptions<DigitalArtsDbContext> options)
             : base(options)

@@ -1,0 +1,28 @@
+﻿@model NotifficationServiceModel
+
+@{
+    ViewBag.Title = "Notiffications Administration";
+}
+<div class="jumbotron">
+    <div class="row">
+        <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
+            <h2 class="heading-margin text-center">Post</h2>
+            <hr />
+
+            <form method="post">
+                <div class="form-group">
+                    <label asp-for="Title"></label>
+                    <input asp-for="Title" class="form-control" placeholder="Aesthetic, cold, etc...">
+                    <span asp-validation-for="Title" class="small text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Content"></label>
+                    <textarea asp-for="Content" rows="4" class="form-control" placeholder="An art of perfection..."></textarea>
+                    <span asp-validation-for="Content" class="small text-danger"></span>
+                </div>
+
+                <input class="btn btn-dark" type="submit" value="Post" />
+            </form>
+        </div>
+    </div>
+</div>

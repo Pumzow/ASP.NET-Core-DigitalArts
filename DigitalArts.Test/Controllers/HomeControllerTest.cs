@@ -1,7 +1,7 @@
 ﻿using DigitalArts.Controllers;
+using DigitalArts.Models.Home;
 using MyTested.AspNetCore.Mvc;
 using Xunit;
-using DigitalArts.Models.Home;
 
 namespace DigitalArts.Test.Controllers
 {

@@ -4,8 +4,6 @@ using System.Linq;
 using DigitalArts.Data;
 using DigitalArts.Data.Models;
 using DigitalArts.Models.Artist;
-using DigitalArts.Models.Arts;
-using DigitalArts.Services.Gallery;
 
 namespace DigitalArts.Services.Arts
 {
@@ -134,9 +132,8 @@ namespace DigitalArts.Services.Arts
                 Arts = arts
             };
         }
-        private IEnumerable<ArtViewServiceModel> GetArts(string Id, IQueryable<Art> artQuery)
-        {
-            var arts = artQuery
+        private IEnumerable<ArtViewServiceModel> GetArts(string Id, IQueryable<Art> artQuery) 
+            => artQuery
                 .Where(a => a.ArtistId == Id)
                 .Select(a => new ArtViewServiceModel
                 {
@@ -148,8 +145,5 @@ namespace DigitalArts.Services.Arts
                     Image = a.Image
                 })
                 .ToList();
-
-            return arts;
-        }
     }
 }

@@ -5,15 +5,7 @@
 }
 
 <div class="jumbotron">
-
-    <div class="btn-group" role="group" aria-label="Basic example">
-        <button type="button" class="btn btn-dark">
-            <a class="nav-link text-light" asp-area="Administration" asp-controller="Arts" asp-action="Index"> Arts </a>
-        </button>
-        <button type="button" class="btn btn-dark">
-            <a class="nav-link text-light" asp-area="Administration" asp-controller="Artists" asp-action="Index"> Artists </a>
-        </button>
-    </div>
+    <partial name="_AdministrationButtons" />
     <hr />
 
     <h1 style="text-align:center;">Artists</h1>

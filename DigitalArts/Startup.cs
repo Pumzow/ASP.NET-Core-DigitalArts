@@ -5,6 +5,7 @@ using DigitalArts.Services.Artist;
 using DigitalArts.Services.Arts;
 using DigitalArts.Services.Gallery;
 using DigitalArts.Services.Home;
+using DigitalArts.Services.Notiffication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -50,6 +51,7 @@ namespace DigitalArts
             services.AddTransient<IArtistService, ArtistService>();
             services.AddTransient<IGalleryService, GalleryService>();
             services.AddTransient<IHomeService, HomeService>();
+            services.AddTransient<INotifficationService, NotifficationService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
