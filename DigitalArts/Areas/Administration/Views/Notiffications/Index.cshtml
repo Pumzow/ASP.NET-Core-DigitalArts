@@ -4,8 +4,23 @@
     ViewBag.Title = "Notiffications Administration";
 }
 
+<div class="row" style="margin: 25px">
+    <div class="col-12 text-center">
+        <button class="btn btn-dark" id="statistics-button">Show Statistics</button>
+    </div>
+</div>
+
+<div class="jumbotron d-none" id="statistics">
+    <div class="row">
+        <h2 class="col-md-3 text-center" id="total-arts"></h2>
+        <h2 class="col-md-3 text-center" id="total-artists"></h2>
+        <h2 class="col-md-3 text-center" id="total-notiffications"></h2>
+        <h2 class="col-md-3 text-center" id="total-bugs"></h2>
+    </div>
+</div>
+
 <div class="jumbotron">
-    <partial name="_AdministrationButtons" />
+    <partial name="_AdministrationButtonsPartial" />
     <hr />
 
     <h1 style="text-align:center;">Notiffications</h1>
@@ -14,35 +29,41 @@
     <button type="button" class="btn btn-dark" style="margin-bottom: 15px">
         <a class="nav-link text-light" asp-area="Administration" asp-controller="Notiffications" asp-action="Post"> Post </a>
     </button>
-
-    <table class="table table-striped">
-        <thead class="thead-dark">
-            <tr>
-                <th class="columnSize" scope="col">Id</th>
-                <th class="columnSize" scope="col">Title</th>
-                <th class="columnSize" scope="col">Content</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var notiffication in Model.OrderByDescending(n => n.Id))
-            {
+    @if (Model.Any())
+    {
+        <table class="table table-striped">
+            <thead class="thead-dark">
                 <tr>
-                    <td scope="col">@notiffication.Id</td>
-                    <td scope="col">@notiffication.Title</td>
-                    <td scope="col">@notiffication.Content</td>
+                    <th class="columnSize" scope="col">Id</th>
+                    <th class="columnSize" scope="col">Title</th>
+                    <th class="columnSize" scope="col">Content</th>
                 </tr>
-                <tr>
-                    <td scope="col">
-                        <div class="btn-group" role="group" aria-label="Basic example">
-                            <button type="button" class="btn btn-dark">
-                                <a class="nav-link text-light" asp-area="Administration" asp-controller="Notiffications" asp-action="Delete" asp-route-id="@notiffication.Id"> Delete </a>
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach (var notiffication in Model.OrderByDescending(n => n.Id))
+                {
+                    <tr>
+                        <td scope="col">@notiffication.Id</td>
+                        <td scope="col">@notiffication.Title</td>
+                        <td scope="col">@notiffication.Content</td>
+                    </tr>
+                    <tr>
+                        <td scope="col">
+                            <div class="btn-group" role="group" aria-label="Basic example">
+                                <button type="button" class="btn btn-dark">
+                                    <a class="nav-link text-light" asp-area="Administration" asp-controller="Notiffications" asp-action="Delete" asp-route-id="@notiffication.Id"> Delete </a>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p> There are no Notiffications on the Database.</p>
+    }
 </div>
 
 <style>
@@ -52,3 +73,18 @@
         text-overflow: ellipsis;
     }
 </style>
+@section Scripts {
+    <script>
+        $('#statistics-button').on('click', ev => {
+            $.get('/api/statistics', (data) => {
+                $('#total-arts').text(data.totalArts + " Arts");
+                $('#total-artists').text(data.totalArtists + " Artists");
+                $('#total-notiffications').text(data.totalNotiffications + " Notiffications");
+                $('#total-bugs').text(data.totalBugs + " Bugs");
+
+                $('#statistics').removeClass('d-none');
+                $('#statistics-button').hide();
+            });
+        });
+    </script>
+}

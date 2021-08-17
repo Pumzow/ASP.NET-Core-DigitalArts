@@ -4,41 +4,62 @@
     ViewBag.Title = "Bugs Administration";
 }
 
+<div class="row" style="margin: 25px">
+    <div class="col-12 text-center">
+        <button class="btn btn-dark" id="statistics-button">Show Statistics</button>
+    </div>
+</div>
+
+<div class="jumbotron d-none" id="statistics">
+    <div class="row">
+        <h2 class="col-md-3 text-center" id="total-arts"></h2>
+        <h2 class="col-md-3 text-center" id="total-artists"></h2>
+        <h2 class="col-md-3 text-center" id="total-notiffications"></h2>
+        <h2 class="col-md-3 text-center" id="total-bugs"></h2>
+    </div>
+</div>
+
 <div class="jumbotron">
-    <partial name="_AdministrationButtons" />
+    <partial name="_AdministrationButtonsPartial" />
     <hr />
 
     <h1 style="text-align:center;">Bugs</h1>
     <hr />
-
-    <table class="table table-striped">
-        <thead class="thead-dark">
-            <tr>
-                <th class="columnSize" scope="col">Id</th>
-                <th class="columnSize" scope="col">Title</th>
-                <th class="columnSize" scope="col">Description</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var bug in Model.OrderByDescending(b => b.Id))
-            {
+    @if (Model.Any())
+    {
+        <table class="table table-striped">
+            <thead class="thead-dark">
                 <tr>
-                    <td scope="col">@bug.Id</td>
-                    <td scope="col">@bug.Title</td>
-                    <td scope="col">@bug.Description</td>
+                    <th class="columnSize" scope="col">Id</th>
+                    <th class="columnSize" scope="col">Title</th>
+                    <th class="columnSize" scope="col">Description</th>
                 </tr>
-                <tr>
-                    <td scope="col">
-                        <div class="btn-group" role="group" aria-label="Basic example">
-                            <button type="button" class="btn btn-dark">
-                                <a class="nav-link text-light" asp-area="Administration" asp-controller="Bugs" asp-action="Delete" asp-route-id="@bug.Id"> Delete </a>
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach (var bug in Model.OrderByDescending(b => b.Id))
+                {
+                    <tr>
+                        <td scope="col">@bug.Id</td>
+                        <td scope="col">@bug.Title</td>
+                        <td scope="col">@bug.Description</td>
+                    </tr>
+                    <tr>
+                        <td scope="col">
+                            <div class="btn-group" role="group" aria-label="Basic example">
+                                <button type="button" class="btn btn-dark">
+                                    <a class="nav-link text-light" asp-area="Administration" asp-controller="Bugs" asp-action="Delete" asp-route-id="@bug.Id"> Delete </a>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p> There are no Bugs on the Database.</p>
+    }
 </div>
 
 <style>
@@ -48,3 +69,18 @@
         text-overflow: ellipsis;
     }
 </style>
+@section Scripts {
+    <script>
+        $('#statistics-button').on('click', ev => {
+            $.get('/api/statistics', (data) => {
+                $('#total-arts').text(data.totalArts + " Arts");
+                $('#total-artists').text(data.totalArtists + " Artists");
+                $('#total-notiffications').text(data.totalNotiffications + " Notiffications");
+                $('#total-bugs').text(data.totalBugs + " Bugs");
+
+                $('#statistics').removeClass('d-none');
+                $('#statistics-button').hide();
+            });
+        });
+    </script>
+}

@@ -7,6 +7,7 @@ using DigitalArts.Services.Bug;
 using DigitalArts.Services.Gallery;
 using DigitalArts.Services.Home;
 using DigitalArts.Services.Notiffication;
+using DigitalArts.Services.Statistics;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -54,6 +55,7 @@ namespace DigitalArts
             services.AddTransient<IHomeService, HomeService>();
             services.AddTransient<INotifficationService, NotifficationService>();
             services.AddTransient<IBugService, BugService>();
+            services.AddTransient<IStatisticsService, StatisticsService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
