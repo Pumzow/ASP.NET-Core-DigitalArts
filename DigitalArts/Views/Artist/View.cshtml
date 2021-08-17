@@ -34,38 +34,43 @@
                 {
                     <h2 class="text-center"> Artist hasn't posted any arts. </h2>
                 }
-
-                <div class="row">
-                    @foreach (var art in Model.Arts)
-                    {
-                        <div class="col-md-6">
-                            <a asp-controller="Art" asp-action="View" asp-route-id="@art.Id" style="text-decoration:none; color: black;">
-                                <div class="card mb-3">
-                                    <img class="card-img-top" src="@art.Image" alt="Can't load the image" style="object-fit: cover; height: 300px;">
-                                    <div class="card-body text-left">
-                                        <h7 class="card-title text-left">@art.DatePublished</h7><br>
-                                        <h7 class="card-title text-left">@art.Likes Likes</h7><br>
+                else
+                {
+                    <div class="row">
+                        @foreach (var art in Model.Arts)
+                        {
+                            <div class="col-md-6">
+                                <a asp-controller="Art" asp-action="View" asp-route-id="@art.Id" style="text-decoration:none; color: black;">
+                                    <div class="card mb-3">
+                                        <img class="card-img-top" src="@art.Image" alt="Can't load the image" style="object-fit: cover; height: 300px;">
+                                        <div class="card-body text-left">
+                                            <h7 class="card-title text-left">@art.DatePublished</h7><br>
+                                            <h7 class="card-title text-left">@art.Likes Likes</h7><br>
+                                        </div>
                                     </div>
-                                </div>
-                            </a>
-                        </div>
-                    }
-                </div>
+                                </a>
+                            </div>
+                        }
+                    </div>
 
-                <div class="row mb-5">
-                    <div class="col-md-6">
-                        <a class="btn btn-dark float-left position-absolute @(Model.CurrentPage == 1 ? "disabled" : string.Empty)"
-                           asp-controller="Artist"
-                           asp-action="Index"
-                           asp-route-currentPage="@previousPage"> << </a>
+                    <div class="row mb-5">
+                        <div class="col-md-6">
+                            <a class="btn btn-dark float-left position-absolute @(Model.CurrentPage == 1 ? "disabled" : string.Empty)"
+                               asp-controller="Artist"
+                               asp-action="View"
+                               asp-route-id="@Model.ArtistUsername"
+                               asp-route-currentPage="@previousPage"> ◁ </a>
+                        </div>
+                        <div class="col-md-6">
+                            <a class="btn btn-dark float-right @(Model.CurrentPage == maxPage ? "disabled" : string.Empty)"
+                               asp-controller="Artist"
+                               asp-action="View"
+                               asp-route-id="@Model.ArtistUsername"
+                               asp-route-currentPage="@(Model.CurrentPage + 1)"> ▷ </a>
+                        </div>
                     </div>
-                    <div class="col-md-6">
-                        <a class="btn btn-dark float-right @(Model.CurrentPage == maxPage ? "disabled" : string.Empty)"
-                           asp-controller="Artist"
-                           asp-action="Index"
-                           asp-route-currentPage="@(Model.CurrentPage + 1)"> >> </a>
-                    </div>
-                </div>
+                }
+
             </div>
         </div>
     </div>

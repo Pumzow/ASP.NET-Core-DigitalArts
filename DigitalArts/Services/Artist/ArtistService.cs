@@ -96,7 +96,7 @@ namespace DigitalArts.Services.Artist
                 return null;
             }
 
-            ArtistServiceModel artist = new ArtistServiceModel
+            var artist = new ArtistServiceModel
             {
                 Id = artistData.Id,
                 FirstName = artistData.FirstName,
